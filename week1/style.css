@@ -79,6 +79,10 @@ aside{
     box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+#open-nav{
+    display: none;
+}
+
 i.mdi{
     position: absolute; 
     top: 4px;
@@ -223,6 +227,10 @@ aside li{
 @media (max-width: 600px) {
     header nav{
         display: none;
+    }
+
+    #open-nav{
+        display: flex;
     }
 
     #gallery{
