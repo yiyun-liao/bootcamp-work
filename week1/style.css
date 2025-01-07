@@ -13,6 +13,9 @@ ul, ol{
     list-style: none;
     margin: 0;
     padding: 0;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Cormorant', 'Times New Roman', Times, serif, sans-serif;
 }
 
 header{
@@ -22,6 +25,7 @@ header{
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    min-height: 48px;
 }
 
 h1{
@@ -52,9 +56,53 @@ header li{
     padding: 4px 16px;
     min-width: 40px;
     min-height: 24px;
-    font-size: 20px;
-    font-weight: 400;
-    font-family: 'Cormorant', 'Times New Roman', Times, serif, sans-serif;
+}
+
+.btn{
+    height: 24px;
+    width: 24px;
+}
+
+.btn img{
+    height: 100%;
+    width: auto;
+}
+
+aside{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60vw;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+i.mdi{
+    position: absolute; 
+    top: 4px;
+    right: 4px; 
+    font-size: 40px; 
+    width: 40px;
+    height: 40px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; 
+}
+
+aside ul{
+    margin-top: 48px;
+}
+
+aside li{
+    display: flex;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
 }
 
 #greeting{
@@ -172,3 +220,24 @@ header li{
     }
 }
 
+@media (max-width: 600px) {
+    header nav{
+        display: none;
+    }
+
+    #gallery{
+        width: 90%;
+    }
+
+    .small-boxes{
+        grid-template-columns: 1fr;
+    }
+    
+    .big-boxes{
+        grid-template-columns: 1fr;
+    }
+    
+    .big-boxes li:first-child, .big-boxes li:nth-child(6) {
+        grid-column: span 1; 
+    }
+}
