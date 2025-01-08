@@ -94,6 +94,7 @@ i.mdi{
     justify-content: center;
     align-items: center;
     cursor: pointer; 
+    transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
 }
 
 aside ul{
