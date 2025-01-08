@@ -56,6 +56,12 @@ header li{
     padding: 4px 16px;
     min-width: 40px;
     min-height: 24px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+header li:hover{
+    background-color: #e5ecf2;
 }
 
 aside{
@@ -73,6 +79,10 @@ aside{
     display: none;
 }
 
+#open-aside:hover, #close-aside:hover{
+    background-color: #e5ecf2;
+}
+
 i.mdi{
     font-size: 40px; 
     width: 40px;
@@ -80,13 +90,14 @@ i.mdi{
     display: flex; 
     justify-content: center;
     align-items: center;
-    cursor: pointer; 
 }
 
 #open-aside, #close-aside{
     position: absolute; 
     top: 4px;
     right: 4px; 
+    cursor: pointer; 
+    border-radius: 4px;
 }
 
 aside ul{
@@ -100,6 +111,12 @@ aside li{
     justify-content: center;
     align-items: center;
     min-height: 40px;
+    cursor: pointer; 
+    border-radius: 4px;
+}
+
+aside li:hover{
+    background-color: #e5ecf2;
 }
 
 #greeting{
@@ -201,6 +218,7 @@ aside li{
     align-items: center;
     padding:8px;
 }
+
 
 @media (min-width: 600px) and (max-width: 1200px) {
     #gallery{
