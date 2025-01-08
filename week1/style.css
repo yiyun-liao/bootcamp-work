@@ -58,16 +58,6 @@ header li{
     min-height: 24px;
 }
 
-.btn{
-    height: 24px;
-    width: 24px;
-}
-
-.btn img{
-    height: 100%;
-    width: auto;
-}
-
 aside{
     display: none;
     position: fixed;
@@ -79,7 +69,7 @@ aside{
     box-shadow: -4px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-#open-nav{
+#open-aside{
     display: none;
 }
 
@@ -91,7 +81,6 @@ i.mdi{
     justify-content: center;
     align-items: center;
     cursor: pointer; 
-    transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
 }
 
 #open-aside, #close-aside{
@@ -183,6 +172,10 @@ aside li{
 
 .big-boxes li{
     height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     overflow: hidden;
     background-size: cover;
     background-repeat: no-repeat;
@@ -190,13 +183,6 @@ aside li{
     background-image: url(./img/gallery-sample.jpg);
 }
 
-
-.big-boxes li{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .big-boxes p{
     width: 100%;
@@ -247,7 +233,7 @@ aside li{
         display: none;
     }
 
-    #open-nav{
+    #open-aside{
         display: flex;
     }
 
