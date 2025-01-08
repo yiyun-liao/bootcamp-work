@@ -84,9 +84,6 @@ aside{
 }
 
 i.mdi{
-    position: absolute; 
-    top: 4px;
-    right: 4px; 
     font-size: 40px; 
     width: 40px;
     height: 40px;
@@ -95,6 +92,12 @@ i.mdi{
     align-items: center;
     cursor: pointer; 
     transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+#open-aside, #close-aside{
+    position: absolute; 
+    top: 4px;
+    right: 4px; 
 }
 
 aside ul{
@@ -170,18 +173,6 @@ aside li{
     margin: 8px 8px 20px 8px; 
 }
 
-.big-boxes li{
-    height: 200px;
-    overflow: hidden;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    background-image: url(./img/gallery-sample.jpg);
-}
-
 .big-boxes li:first-child {
     grid-column: span 2;
 }
@@ -190,11 +181,37 @@ aside li{
     grid-column: span 2;
 }
 
-.big-boxes div{
+.big-boxes li{
+    height: 200px;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(./img/gallery-sample.jpg);
+}
+
+
+.big-boxes li{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.big-boxes p{
     width: 100%;
     background-color: rgba(255, 255, 255, 0.6);
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding:8px;
+}
+
+.big-boxes i{
+    width: 100%;
+    color: rgb(255, 235, 14, 0.4);
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
     padding:8px;
 }
