@@ -153,13 +153,13 @@ function func(...data){
             middleName = name[name.length - 2]; // 取倒數第二個字
         }  
 
-        // count
+        // count 。 新增進 object 及計算同時進行
+        // key (明) 如果有值就「值+1」 ，沒有的話「0+1」, middleNameCount = {明：1}
         middleNameCount[middleName] = (middleNameCount[middleName] || 0) + 1;
 
-        // if it the first time, record it
-        if (!middleNameMap[middleName]) {
+        // record it and allow to overwrite
+        // middleNameMap[明] = 陳王明雅, middleNameMap = {明：陳王明雅}
         middleNameMap[middleName] = name;
-        }
     }
   
     // 找出唯一的中間名
