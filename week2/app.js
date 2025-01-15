@@ -1,7 +1,7 @@
-// // task01
-// // build data structure
-// // find the 'station' in messages and return station only (simply the sentence)
-// // calculate the nearest station
+// task01
+// build data structure
+// find the 'station' in messages and return station only (simply the sentence)
+// calculate the nearest station
 // function findAndPrint(messages,currentStation){
 //     const stations = {
 //         "01": "Xindian",
@@ -76,57 +76,57 @@
 //task2////////////////////////////////////////////////////////////////////////////////
 //sort by price or rate, get array [teacherA, teacherB, teacherC]
 //check time
-// function book(consultants, hour, duration, criteria) {
-//     let sortedConsultants = [];
+function book(consultants, hour, duration, criteria) {
+    let sortedConsultants = [];
   
-//     //sort by price or rate, get array use: Array.prototype.sort([compareFunction])
-//     if (criteria === "price") {
-//       sortedConsultants = consultants.sort((a, b) => a.price - b.price); 
-//     } else if (criteria === "rate") {
-//       sortedConsultants = consultants.sort((a, b) => b.rate - a.rate);
-//     }
+    //sort by price or rate, get array use: Array.prototype.sort([compareFunction])
+    if (criteria === "price") {
+      sortedConsultants = consultants.sort((a, b) => a.price - b.price); 
+    } else if (criteria === "rate") {
+      sortedConsultants = consultants.sort((a, b) => b.rate - a.rate);
+    }
   
-//     for (let consultant of sortedConsultants) {
-//         // Add booked in array, booked is also an array. 
-//         // Cause next student should check the available time, we should add value in consultants
-//         // BTW: why do use 'if', cause the function wil run in every time
-//         if (!consultant.booked){
-//             consultant.booked = [];
-//         } 
+    for (let consultant of sortedConsultants) {
+        // Add booked in array, booked is also an array. 
+        // Cause next student should check the available time, we should add value in consultants
+        // BTW: why do use 'if', cause the function wil run in every time
+        if (!consultant.booked){
+            consultant.booked = [];
+        } 
   
-//         // Check whether the time is available, if not, just check another teacher
-//         let isAvailable = true;
-//         for (let booking of consultant.booked) {
-//         if (hour < booking.end && hour + duration > booking.start) {
-//             isAvailable = false; 
-//             break;
-//         }
-//         }
+        // Check whether the time is available, if not, just check another teacher
+        let isAvailable = true;
+        for (let booking of consultant.booked) {
+        if (hour < booking.end && hour + duration > booking.start) {
+            isAvailable = false; 
+            break;
+        }
+        }
   
-//         // If yes, add into array and return their name
-//         if (isAvailable) {
-//             consultant.booked.push({ start: hour, end: hour + duration });
-//             console.log(consultant.name);
-//             return;
-//         }
-//     }
+        // If yes, add into array and return their name
+        if (isAvailable) {
+            consultant.booked.push({ start: hour, end: hour + duration });
+            console.log(consultant.name);
+            return;
+        }
+    }
   
-//     // If no available consultants, return "No Service"
-//     console.log("No Service");
-// }
+    // If no available consultants, return "No Service"
+    console.log("No Service");
+}
   
-// const consultants=[
-//     {"name":"John", "rate":4.5, "price":1000},
-//     {"name":"Bob", "rate":3, "price":1200},
-//     {"name":"Jenny", "rate":3.8, "price":800}
-// ];
-// book(consultants, 15, 1, "price"); // Jenny
-// book(consultants, 11, 2, "price"); // Jenny
-// book(consultants, 10, 2, "price"); // John
-// book(consultants, 20, 2, "rate"); // John
-// book(consultants, 11, 1, "rate"); // Bob
-// book(consultants, 11, 2, "rate"); // No Service
-// book(consultants, 14, 3, "price"); // John
+const consultants=[
+    {"name":"John", "rate":4.5, "price":1000},
+    {"name":"Bob", "rate":3, "price":1200},
+    {"name":"Jenny", "rate":3.8, "price":800}
+];
+book(consultants, 15, 1, "price"); // Jenny
+book(consultants, 11, 2, "price"); // Jenny
+book(consultants, 10, 2, "price"); // John
+book(consultants, 20, 2, "rate"); // John
+book(consultants, 11, 1, "rate"); // Bob
+book(consultants, 11, 2, "rate"); // No Service
+book(consultants, 14, 3, "price"); // John
 
 // note: 被預約的時間個別顯示，這樣資料之後還可以被應用，但如果直接合併成時間段，要應用就可能還要再拆開
 // consultant=[
@@ -138,21 +138,21 @@
 
 //task3///////////////////////////////////////////////////////////////////////////////
 // function1: choose second word:4in5, 3in4, 2in3, 2in2 => 這個才有邏輯，取 n-1 
-// function2: add string in front of the name, e.g.: A郭林靜宜, AA郭宣恆, AA吳明A
+// function2: add string in front of the name, e.g.: A郭林靜宜, AA郭宣恆, AA吳明A => 太複雜了，pass
 // select the different one => which only be counted in one time
 function func(...data){
     const middleNameCount = {};
     const middleNameMap = {};
   
     // choose second word
-    for (let name of data) {
+    for (let name of data) { 
         let middleName;
         if (name.length === 2) {
             middleName = name[name.length - 1]; // 如果名字只有兩個字，取最後一個字
         } else {
             middleName = name[name.length - 2]; // 取倒數第二個字
         }  
-        
+
         // count
         middleNameCount[middleName] = (middleNameCount[middleName] || 0) + 1;
 
@@ -183,3 +183,29 @@ func("彭大牆", "陳王明雅", "吳明"); // print 彭大牆
 func("郭靜雅", "王立強", "郭林靜宜", "郭立恆", "林花花"); // print 林花花
 func("郭宣雅", "林靜宜", "郭宣恆", "林靜花"); // print 沒有
 func("郭宣雅", "夏曼藍波安", "郭宣恆"); // print 夏曼藍波安
+
+//task4///////////////////////////////////////////////////////////////////////////////
+//There is a number sequence: 0, 4, 8, 7, 11, 15, 14, 18, 22, 21, 25, …
+//rule +4 +4 -1 
+// function1: build the array and use index to find the value
+function getNumber(index){
+  let ans = 0;
+  for(let i = 1; i <= index; i++){
+    if(i % 3 == 0){
+      ans -= 1;
+    }else{
+      ans += 4;
+    }
+  }
+  return console.log(ans);
+}
+
+// function2: calculate: (index)x4-[index/3 取整數]X5
+function getNumber(index){
+  console.log(index * 4 - Math.floor(index / 3) * 5)
+}
+
+getNumber(1); // print 4
+getNumber(5); // print 15
+getNumber(10); // print 25
+getNumber(30); // print 70
