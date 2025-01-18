@@ -154,8 +154,8 @@ book(consultants, 14, 3, "price"); // John
 
 //task3///////////////////////////////////////////////////////////////////////////////
 // function1: choose second word:4in5, 3in4, 2in3, 2in2 => 這個才有邏輯，取 n-1 
-// function2: add string in front of the name, e.g.: A郭林靜宜, AA郭宣恆, AA吳明A => 太複雜了，pass
-// select the different one => which only be counted in one time
+// function2: add string in front of the name, e.g.: 郭郭林靜宜, A郭林靜宜, AA郭宣恆, AA吳明A => 太複雜了，pass
+// step02: select the different one => which only be counted in one time
 function func(...data){
     const middleNameCount = {};
     const middleNameMap = {};
