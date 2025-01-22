@@ -162,8 +162,8 @@ aside li:hover{
 }
 
 .small-boxes img{
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 100%;
     object-fit: cover;
     background-repeat: no-repeat;
 }
@@ -197,7 +197,7 @@ aside li:hover{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(./img/gallery-sample.jpg);
+    background-image: ;
 }
 
 
