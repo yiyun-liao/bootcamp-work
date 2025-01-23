@@ -15,7 +15,10 @@ let spotsData = []; // 用來存放 API 的資料
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchData();
-    document.getElementById('load-more').addEventListener('click', loadMore);
+    document.getElementById('load-more').addEventListener('click', () => {
+        loadMore();
+        checkGridColumn();
+    });
 });
 
 async function fetchData() {
@@ -56,9 +59,9 @@ function renderSpots() {
     });
 
     // 更新大框內容 (後十筆資料)
-    const bigBoxes = document.querySelectorAll('.big-boxes li');
+    const bigBoxesLi = document.querySelectorAll('.big-boxes li');
 
-    bigBoxes.forEach((box, index) => { 
+    bigBoxesLi.forEach((box, index) => { 
         if (index < spotsData.length - 3) {
             const spot = spotsData[index + 3];
             const p = box.querySelector('p');
@@ -71,6 +74,7 @@ function renderSpots() {
         }
     });
 
+    checkGridColumn();
 }
 
 function renderBigBoxes(){
@@ -85,7 +89,6 @@ function renderBigBoxes(){
         const firstImg = firstImgUrl[0];
 
         const newLi = templateLi.cloneNode(true); // 複製模板
-        newLi.style.display = 'flex';
         newLi.style.backgroundImage = `url("${firstImg}")`; 
         const newLiP = newLi.querySelector('p');
         newLiP.textContent = spot.stitle; 
@@ -100,6 +103,19 @@ function loadMore() {
         renderBigBoxes(); // 繼續渲染新的大圖
     } else {
         alert('沒有更多的資料可以載入！');
+    }
+}
+
+function checkGridColumn(){
+    const bigBoxes = document.querySelectorAll('.big-boxes li');
+    if(window.matchMedia("(min-width: 600px) and (max-width: 1200px)").matches){
+        bigBoxes.forEach(box => {
+            box.style.gridColumn = 'span 1';
+        });
+        if(currentIndex % 4 !== 0){
+            bigBoxes[currentIndex-1].style.gridColumn = 'span 2';
+            bigBoxes[currentIndex-2].style.gridColumn = 'span 2';
+        }
     }
 }
 

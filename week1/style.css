@@ -179,11 +179,7 @@ aside li:hover{
     margin: 8px 8px 20px 8px; 
 }
 
-.big-boxes li:first-child {
-    grid-column: span 2;
-}
-
-.big-boxes li:nth-child(6) {
+.big-boxes li:nth-child(5n+1) {
     grid-column: span 2;
 }
 
@@ -259,12 +255,8 @@ aside li:hover{
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
     
-    .big-boxes li:first-child, .big-boxes li:nth-child(6) {
+    .big-boxes li:nth-child(5n+1) {
         grid-column: span 1; 
-    }
-
-    .big-boxes li:nth-child(9), .big-boxes li:nth-child(10) {
-        grid-column: span 2;
     }
 }
 
@@ -289,7 +281,7 @@ aside li:hover{
         grid-template-columns: 1fr;
     }
     
-    .big-boxes li:first-child, .big-boxes li:nth-child(6) {
+    .big-boxes li:nth-child(5n+1) {
         grid-column: span 1; 
     }
 
