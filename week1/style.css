@@ -197,7 +197,7 @@ aside li:hover{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: ;
+    background-image:;
 }
 
 
@@ -217,6 +217,28 @@ aside li:hover{
     justify-content: flex-end;
     align-items: center;
     padding:8px;
+}
+
+#gallery > div{
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gallery > div > button{
+    min-width: 120px;
+    min-height: 48px;
+    border-radius: 8px;
+    background-color: #D8E7F3;
+    border: 1px solid #cedeea;
+    font-size: 16px;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+
+#gallery > div > button:hover{
+    background-color: #b6c7d4;
 }
 
 
@@ -270,4 +292,8 @@ aside li:hover{
     .big-boxes li:first-child, .big-boxes li:nth-child(6) {
         grid-column: span 1; 
     }
+
+    #gallery > div > button{
+        width: 100%;
+    }    
 }

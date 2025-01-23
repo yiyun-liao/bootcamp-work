@@ -32,8 +32,8 @@ async function fetchData() {
 function renderSpots(spots) {
     console.log('show spots', spots)
     const smallBoxes = document.querySelectorAll('.small-boxes li');
-    const bigBoxes = document.querySelectorAll('.big-boxes li');
     console.log(smallBoxes)
+    const bigBoxes = document.querySelectorAll('.big-boxes li');
 
     // 更新小框內容 (前三筆資料)
     smallBoxes.forEach((box, index) => {
@@ -51,7 +51,7 @@ function renderSpots(spots) {
             p.textContent = spot.stitle;
         }
     });
-    // 更新大框內容 (前三筆資料)
+    // 更新大框內容 (後十筆資料)
     bigBoxes.forEach((box, index) => { 
         if (index < spots.length - 3) {
             const spot = spots[index + 3];
@@ -65,3 +65,4 @@ function renderSpots(spots) {
         }
     });
 }
+
