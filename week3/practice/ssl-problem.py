@@ -1,23 +1,35 @@
-# import csv
-# import json
-# import urllib.request as request
-# src="https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1"
-# with request.urlopen(src) as response:
-#     data = response.read().decode("utf-8") 
-# data = json.loads(data)
-# print(data)
+# 一般的寫法 ###################################
+import csv
+import json
+import urllib.request as request
+src="https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1"
+with request.urlopen(src) as response:
+    data = response.read().decode("utf-8") 
+data = json.loads(data)
+print(data)
 
 
+# 繞過 ssl 問題 ###################################
 import ssl
 import urllib.request as request
+import json
+import csv
+import os
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
 src = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1"
+
 with request.urlopen(src) as response:
     data = response.read().decode("utf-8") 
-print(data)
+data = json.loads(data)
+# print(data)
 
+spot_data = data["data"]["results"]
+# print(spot_data)
+
+
+# 看不懂的高級寫法 ###################################
 # import json
 # from urllib.request import urlopen, Request
 # from urllib.error import HTTPError, URLError
