@@ -73,3 +73,23 @@ spot_data = data["data"]["results"]
 # data = get(url, headers) 
 # print(data)
 
+
+# mrt.csv 個別印出對應捷運跟景點名稱
+創建 mrt.csv
+with open("mrt.csv", "w", encoding="utf-8", newline="") as mrt_file:
+    writer = csv.writer(mrt_file)
+    
+    # 寫入表頭
+    writer.writerow(["MRT", "stitle1", "stitle2", "stitle3", "..."])
+    
+    for mrt_entry in data2:
+        mrt = mrt_entry.get("MRT", "Unknown MRT")  # MRT 名稱
+        serial_no = mrt_entry.get("SERIAL_NO")    # SERIAL_NO
+        if not serial_no:
+            continue  # 如果 SERIAL_NO 不存在，跳過該條目
+        
+        # 找到 SERIAL_NO 對應的所有 stitle
+        stitles = [serial_to_stitle[serial_no]] if serial_no in serial_to_stitle else []
+        
+        # 寫入行（MRT 和 stitle 集合）
+        writer.writerow([mrt, *stitles])
