@@ -136,6 +136,7 @@ const consultants=[
     {"name":"Bob", "rate":3, "price":1200},
     {"name":"Jenny", "rate":3.8, "price":800}
 ];
+
 book(consultants, 15, 1, "price"); // Jenny
 book(consultants, 11, 2, "price"); // Jenny
 book(consultants, 10, 2, "price"); // John
@@ -181,17 +182,17 @@ function func(...data){
     // 找出唯一的中間名
     let uniqueMiddleName = null;
     for (let [key, count] of Object.entries(middleNameCount)) {
-      if (count === 1) {
-        uniqueMiddleName = key;
-        break;
-      }
+        if (count === 1) {
+            uniqueMiddleName = key;
+            break;
+        }
     }
   
     // 輸出結果
     if (uniqueMiddleName) {
-      console.log(middleNameMap[uniqueMiddleName]);
+        console.log(middleNameMap[uniqueMiddleName]);
     } else {
-      console.log("沒有");
+        console.log("沒有");
     }
 }
 
@@ -205,20 +206,20 @@ func("郭宣雅", "夏曼藍波安", "郭宣恆"); // print 夏曼藍波安
 //rule +4 +4 -1 
 // function1: build the array and use index to find the value
 function getNumber(index){
-  let ans = 0;
-  for(let i = 1; i <= index; i++){
-    if(i % 3 == 0){
-      ans -= 1;
-    }else{
-      ans += 4;
+    let ans = 0;
+    for(let i = 1; i <= index; i++){
+        if(i % 3 == 0){
+            ans -= 1;
+        }else{
+            ans += 4;
+        }
     }
-  }
-  return console.log(ans);
+    return console.log(ans);
 }
 
 // function2: calculate: (index)x4-[index/3 取整數]X5
 function getNumber(index){
-  console.log(index * 4 - Math.floor(index / 3) * 5)
+    console.log(index * 4 - Math.floor(index / 3) * 5)
 }
 
 getNumber(1); // print 4
