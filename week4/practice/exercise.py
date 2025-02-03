@@ -6,7 +6,7 @@ app = FastAPI() #產生 FastAPI 的物件
 
 # --------------kick off---------------------------------------------
 # 處理路由設定，處理路徑 /
-@app.get("/")
+@app.get("/hello")
 def index():
     return "Hello FastAPI"
 # 處理路由設定，處理路徑 /data
@@ -34,8 +34,8 @@ def square2(number):
 # http://127.0.0.1:8000/hello 這個路由沒有 name 參數，會導致 FastAPI 無法正確解析請求，因為函式 hello(name) 需要 name 參數，但路由沒有提供。
 
 # 同時支援 /hello 和 /hello/{name}
-@app.get("/hello")
-@app.get("/hello/{name}")
+@app.get("/helloyou")
+@app.get("/helloyou/{name}")
 def hello(name: str = "訪客"):
     message = "哈囉，" + name
     return {"message": message}
@@ -101,7 +101,7 @@ from fastapi.responses import FileResponse
 @app.get("/")
 def index4():
     return FileResponse("index.html")
-@app.get("/logo")
+@app.get("/img/logo")
 def index5():
     return FileResponse("logo.png")
 
@@ -122,6 +122,36 @@ from fastapi.responses import RedirectResponse
 @app.get("/")
 def index8():
     return {"data":[1,2,3]}
-@app.get("/member")
+@app.get("/outer")
 def index9():
-    return RedirectResponse("/")
+    return RedirectResponse("http://www.google.co/")
+@app.get("/inner")
+def index10():
+    return RedirectResponse("/path")
+
+# --------------靜態檔案, static file---------------------------------------------
+# 包含程式邏輯的路由
+@app.get("/test")
+def test():
+    result= 3*4
+    return {"data": result}
+@app.get("/square")
+def test(number:Annotated[int,None]):
+    result= number*number
+    return {"data":result}
+
+# 沒有包含程式邏輯，直接傳回檔案內容
+from fastapi.responses import FileResponse
+@app.get("/")
+def index():
+    return FileResponse("home.html")
+
+#static file
+from fastapi.staticfiles import StaticFiles
+#開啟圖像，http://127.0.0.1:8000/test/imgs/sample01.jpg
+app.mount(
+    "/test", #http://主機名稱/test/檔案名稱
+    StaticFiles(directory="week4/practice/public") #專案資料夾底下的 http://主機名稱/week4/practice/public/檔案名稱
+)
+#連回首頁
+app.mount("/",StaticFiles(directory="week4/practice/public", html=True))
