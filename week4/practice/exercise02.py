@@ -5,6 +5,21 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI() #產生 FastAPI 的物件
 
+# --------------method---------------------------------------------
+# 處理 GET 方法的路徑 /test
+@app.get("/test")
+def testGet():
+    return {"data":10, "method":"GET"}
+#處理 POST 方法的路徑 /test
+@app.post("/test")
+def testPost():
+    return {"ok":True, "method":"POST"}
+
+from fastapi.routing import APIRoute
+for route in app.routes:
+    print(route.path, route.methods)
+
+# --------------前後端連接---------------------------------------------
 @app.get("/square")
 def square(num:Annotated[int,None]):
     result= num*num

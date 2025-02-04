@@ -39,5 +39,23 @@
             <button>計算</button>
         </form>
     </div>
+    <h3>以下使用 Fetch 測試不同的連線方法</h3>
+    <button onclick="connectPOST()">POST 連線</button>
+    <button onclick="connectGET()">GET 連線</button>
+    <script>
+        async function connectPOST(){
+            let response = await fetch("/test",{method:"POST"});
+            let data = await response.json();
+            console.log(data);
+        }
+        async function connectGET(){
+            let response = await fetch("/test",{method:"GET"});
+            let data = await response.json();
+            console.log(data);
+        }
+    </script>
+    <div>
+        <a href="/test"> 測試 /test 網址</a>
+    </div>
 </body>
 </html>
