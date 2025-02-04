@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Query, Path
+from fastapi import FastAPI, Query, Path, Body
 from typing import Annotated
 from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
+import json
 
 app = FastAPI() #產生 FastAPI 的物件
 
@@ -18,6 +19,26 @@ def testPost():
 from fastapi.routing import APIRoute
 for route in app.routes:
     print(route.path, route.methods)
+
+# --------------POST request body---------------------------------------------
+#
+@app.post("/PostBodyString")
+def PostBodyString(body=Body(None)):
+    body=body.decode("utf-8")
+    print(body)
+    return {"ok":True, "method":"POST"}
+
+@app.post("/PostBodyJSON")
+def PostBodyJSON(body=Body(None)):
+    data=json.loads(body)
+    print(data)
+    return {"ok":True, "method":"POST", "result":data["x"]}
+
+@app.post("/add")
+def add(body=Body(None)):
+    data=json.loads(body)
+    result = data["n1"] + data["n2"]
+    return {"ok":True, "method":"POST", "result":result}
 
 # --------------前後端連接---------------------------------------------
 @app.get("/square")
