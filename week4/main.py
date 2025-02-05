@@ -1,16 +1,13 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Form
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-# 處理登入請求
+# 處理登入請求 使用  Form Data
 @app.post("/signin")
-async def signin(request:Request):
-    json_data = await request.json()
-    username = json_data.get("username","")
-    password = json_data.get("password","")
-
+async def signin(username: str = Form(...), password: str = Form(...)):
+    print(username, password)
     if not username or not password:
         return {"error": "Please enter username and password"}
     
@@ -18,6 +15,23 @@ async def signin(request:Request):
         return {"message": "Login successful"}
     
     return {"error": "Username or password is not correct"}
+
+# 處理登入請求 使用 JSON 格式
+# from fastapi import Request
+# @app.post("/signin")
+# async def signin(request:Request):
+#     json_data = await request.json()
+#     username = json_data.get("username","")
+#     password = json_data.get("password","")
+#     print(username, password)
+
+#     if not username or not password:
+#         return {"error": "Please enter username and password"}
+    
+#     if username == "test" and password == "test":
+#         return {"message": "Login successful"}
+    
+# return {"error": "Username or password is not correct"}
 
 
 # 成功頁面

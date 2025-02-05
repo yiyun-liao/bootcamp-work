@@ -14,23 +14,47 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 })
 
+// 使用表單格式
 async function signin(){
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const formData = new FormData();
+    formData.append("username", document.getElementById("username").value);
+    formData.append("password", document.getElementById("password").value);
 
-    try{
-        const response = await fetch("/signin",{
-            method:"POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({username, password})
+    try {
+        const response = await fetch("/signin", {
+            method: "POST",
+            body: formData, // 改用 FormData 來匹配後端的 Form 格式
         });
-        if(!response.ok){
-            throw new Error("HTTP error! Status: ${response.status}")
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json();
-        console.log(data)
-    }catch(error){
+        console.log(data);
+    } catch (error) {
         console.error("Error", error);
     }
 }
+
+// 使用 JSON 格式
+// async function signin(){
+//     const username = document.getElementById("username").value;
+//     const password = document.getElementById("password").value;
+
+//     try{
+//         const response = await fetch("/signin",{
+//             method:"POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({username, password})
+//         });
+//         if(!response.ok){
+//             throw new Error("HTTP error! Status: ${response.status}")
+//         }
+//         const data = await response.json();
+//         console.log(data)
+//     }catch(error){
+//         console.error("Error", error);
+//     }
+// }
 
