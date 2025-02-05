@@ -21,7 +21,6 @@ for route in app.routes:
     print(route.path, route.methods)
 
 # --------------POST request body---------------------------------------------
-#
 @app.post("/PostBodyString")
 def PostBodyString(body=Body(None)):
     body=body.decode("utf-8")
