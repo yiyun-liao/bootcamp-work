@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week4 FastAPI</title>
     <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
     <header>
@@ -12,14 +13,14 @@
     </header>
     <main>
         <h2>登入系統</h2>
-        <form action="">
+        <form action="" method="post">
             <div class="input-style">
                 <label for="account">帳號</label>
-                <input type="text" name="" id="account">
+                <input type="text" name="" id="account" autocomplete="username"> 
             </div>
             <div class="input-style">
                 <label for="password">密碼</label>
-                <input type="password" name="" id="password">
+                <input type="password" name="" id="password" autocomplete="new-password">
             </div>
             <div class="input-style">
                 <label for="agree-policy">同意條款</label>
