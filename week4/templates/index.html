@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week4 FastAPI</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/app.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>歡迎光臨，請輸入帳號密碼</h1>
+        <h1>{{ title }}</h1> 
+        <!-- 歡迎光臨，請輸入帳號密碼 -->
     </header>
     <main>
-        <h2>登入系統</h2>
+        <h2>{{ subtitle }}</h2>
+        <!-- 登入系統 -->
         <form action="/signin" method="post">
             <div class="input-style">
                 <label for="username">帳號</label>

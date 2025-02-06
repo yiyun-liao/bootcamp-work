@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week4 FastAPI</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/app.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>歡迎光臨，這是會員頁</h1>
+        <h1>{{ title }}</h1>
+        <!-- 失敗頁面 -->
     </header>
     <main>
-        <h2>恭喜你，成功登入系統</h2>
+        <h2>{{ subtitle }}</h2>
+        <!-- 帳號、或密碼輸入錯誤 -->
     </main>
 </body>
 </html>
