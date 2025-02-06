@@ -26,24 +26,10 @@ app = FastAPI()
 # 處理登入請求 使用  Form Data
 @app.post("/signin")
 async def signin(username: str = Form(...), password: str = Form(...)):
-    print(username, password)
+    print(username, password) #"test" , "test"
     if username == "test" and password == "test":
         return JSONResponse(content={"redirect": "/member.html"}, status_code=200)
     else:
         return JSONResponse(content={"redirect": "/error.html"}, status_code=200)
-
-# 成功頁面
-# @app.get("/member")
-# async def member():
-#     return "Login successful! Welcome to the member page."
-
-# 錯誤頁面
-# @app.get("/error")
-# async def error(message: str):
-#     return f"Login failed: {message}"
-
-# from fastapi.routing import APIRoute
-# for route in app.routes:
-#     print(route.path, route.methods)
 
 app.mount("/", StaticFiles(directory="week4/service", html=True), name="static")

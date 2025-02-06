@@ -19,7 +19,7 @@ async function signin(){
     const formData = new URLSearchParams();
     formData.append("username", document.getElementById("username").value);
     formData.append("password", document.getElementById("password").value);
-    // console.log(formData.toString());
+    // console.log(formData.toString()); //username=test&password=test
     try {
         const response = await fetch("/signin", {
             method: "POST",
@@ -30,7 +30,7 @@ async function signin(){
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json();
+        const data = await response.json(); //{ "redirect": "/member.html" } or { "redirect": "/error.html" }
         if (data.redirect) {
             window.location.href = data.redirect;
         }
