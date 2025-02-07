@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week4 FastAPI</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="/static/app.js" defer></script>
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='app.js') }}" defer></script>
 </head>
 <body>
     <header>

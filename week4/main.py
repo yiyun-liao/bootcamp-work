@@ -21,10 +21,13 @@ def index(request: Request):
 async def signin(request: Request, username: str = Form(...), password: str = Form(...)):
     print(username, password) #"test" , "test"
     if not username or not password:
-        return RedirectResponse(url="/error?message=Please_enter_username_and_password", status_code=HTTP_303_SEE_OTHER)
-    if username == "test" and password == "test":
+        return RedirectResponse(url="/error?msg=請完整輸入帳號密碼", status_code=HTTP_303_SEE_OTHER)
+    if username != "test":
+        return RedirectResponse(url="/error?msg=帳號不存在，請重新登入", status_code=HTTP_303_SEE_OTHER)
+    if password != "test":
+        return RedirectResponse(url="/error?msg=密碼錯誤，請重新輸入", status_code=HTTP_303_SEE_OTHER)
+    else:
         return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
-    return RedirectResponse(url="/error?message=Username_or_password_is_not_correct", status_code=HTTP_303_SEE_OTHER)
 
 
 @app.get("/member")
@@ -36,11 +39,11 @@ def member(request: Request):
         })
 
 @app.get("/error")
-def error(request: Request, message: str = "Login failed"):
+def error(request: Request, msg: str = "Login failed"):
     return templates.TemplateResponse("error.html", {
         "request": request,
         "title": "失敗頁面",
-        "message": message
+        "subtitle": msg
     })
 
 app.mount("/static", StaticFiles(directory="week4/static"), name="static")
