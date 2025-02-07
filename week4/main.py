@@ -1,13 +1,25 @@
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.sessions import SessionMiddleware
 from starlette.status import HTTP_303_SEE_OTHER
 from fastapi.templating import Jinja2Templates
 
+import time
 
 app = FastAPI()
-
+app.add_middleware(SessionMiddleware, secret_key="your_secret_key")
 templates = Jinja2Templates(directory="week4/templates")
+
+# @app.middleware("http")
+# async def check_signed_in_status(request: Request, call_next):
+#     print('>>>', request.method)
+#     start_time = time.perf_counter()
+#     response = await call_next(request)
+#     process_time = time.perf_counter() - start_time
+#     response.headers["X-Process-Time"] = str(process_time)
+#     return response
+
 
 @app.get("/")
 def index(request: Request):
@@ -27,11 +39,14 @@ async def signin(request: Request, username: str = Form(...), password: str = Fo
     if password != "test":
         return RedirectResponse(url="/error?msg=密碼錯誤，請重新輸入", status_code=HTTP_303_SEE_OTHER)
     else:
+        request.session["SIGNED-IN"] = True
         return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
 
 
 @app.get("/member")
 def member(request: Request):
+    if not request.session.get("SIGNED-IN"):
+        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     return templates.TemplateResponse("member.html", {
         "request": request,
         "title": "歡迎光臨，這是會員頁",
@@ -47,27 +62,8 @@ def error(request: Request, msg: str = "Login failed"):
     })
 
 @app.get("/signout")
-def signout():
+def signout(request:Request):
+    request.session.clear() 
     return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
 
 app.mount("/static", StaticFiles(directory="week4/static"), name="static")
-
-
-# import time
-# from fastapi.middleware import Middleware
-# from starlette.middleware.base import BaseHTTPMiddleware
-
-# class CustomHeaderMiddleware(BaseHTTPMiddleware):
-#     async def dispatch(self, request, call_next):
-#         print('>>>', request.method)
-#         # start_time = time.time()
-#         response = await call_next(request)
-#         # process_time = time.time() - start_time
-#         # response.headers["X-Process-Time"] = str(process_time)
-#         return response
-    
-# middleware = [
-#     Middleware(CustomHeaderMiddleware)
-# ]
-
-# app = FastAPI(middleware=middleware)
