@@ -46,6 +46,10 @@ def error(request: Request, msg: str = "Login failed"):
         "subtitle": msg
     })
 
+@app.get("/signout")
+def signout():
+    return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+
 app.mount("/static", StaticFiles(directory="week4/static"), name="static")
 
 
