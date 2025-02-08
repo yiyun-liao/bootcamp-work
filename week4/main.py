@@ -5,12 +5,11 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.status import HTTP_303_SEE_OTHER
 from fastapi.templating import Jinja2Templates
 
-import time
-
 app = FastAPI()
 app.add_middleware(SessionMiddleware, secret_key="your_secret_key")
 templates = Jinja2Templates(directory="week4/templates")
 
+# import time
 # @app.middleware("http")
 # async def check_signed_in_status(request: Request, call_next):
 #     print('>>>', request.method)
