@@ -32,11 +32,11 @@ def index(request: Request):
 async def signin(request: Request, username: str = Form(...), password: str = Form(...)):
     print(username, password) #"test" , "test"
     if not username or not password:
-        return RedirectResponse(url="/error?msg=請完整輸入帳號密碼", status_code=HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/error?message=請完整輸入帳號密碼", status_code=HTTP_303_SEE_OTHER)
     if username != "test":
-        return RedirectResponse(url="/error?msg=帳號不存在，請重新登入", status_code=HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/error?message=帳號不存在，請重新登入", status_code=HTTP_303_SEE_OTHER)
     if password != "test":
-        return RedirectResponse(url="/error?msg=密碼錯誤，請重新輸入", status_code=HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/error?message=密碼錯誤，請重新輸入", status_code=HTTP_303_SEE_OTHER)
     else:
         request.session["SIGNED-IN"] = True
         return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
@@ -53,11 +53,11 @@ def member(request: Request):
         })
 
 @app.get("/error")
-def error(request: Request, msg: str = "Login failed"):
+def error(request: Request, message: str = "Login failed"):
     return templates.TemplateResponse("error.html", {
         "request": request,
         "title": "失敗頁面",
-        "subtitle": msg
+        "subtitle": message
     })
 
 @app.get("/signout")
