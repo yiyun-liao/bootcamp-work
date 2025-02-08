@@ -4,12 +4,19 @@ import json
 import csv
 
 # ssl problem
-ssl._create_default_https_context = ssl._create_unverified_context
+# ssl._create_default_https_context = ssl._create_unverified_context
+
+# import certifi
+# ssl_context = ssl.create_default_context(cafile=certifi.where())
 
 # Fetch data from URLs
 url1 = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1"
 url2 = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-2"
 
+# def fetch_data(url):
+#     with request.urlopen(url, context=ssl_context) as response:
+#         return json.loads(response.read().decode("utf-8"))
+    
 def fetch_data(url):
     with request.urlopen(url) as response:
         return json.loads(response.read().decode("utf-8"))

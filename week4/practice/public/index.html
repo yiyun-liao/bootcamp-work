@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 網頁</title>
+    <style>
+        div{
+            border-bottom: 2px solid black; 
+            padding-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Hello</h2>
+    <div>
+        <h3>以下幾個超連結</h3>
+        <a href="/square?num=10">計算 10 的平方</a>
+        <a href="/square?num=20">計算 20 的平方</a>
+    </div>
+    <div>
+        <h3>以下連接到另一個包含圖片的網頁</h3>
+        <a href="/page.html">另外一個網頁</a>
+    </div>
+    <div>
+        <h3>以下提供計算平方的功能</h3>
+        <form action="/square">
+            <!--form action="/square" <strong>action = 路徑 path</strong>-->
+            請輸入整數 <input type="text" name="num"> 
+            <!-- input type="text" name="num" <strong>name = 參數 query string</strong> -->
+            <button>計算</button>
+        </form>
+    </div>
+    <div>
+        <h3>以下提供計算兩個整數相乘的功能</h3>
+        <form action="/multiply">
+            整數一 <input type="text" name="n1"> <br>
+            整數二 <input type="text" name="n2"> <br>
+            <button>計算</button>
+        </form>
+    </div>
+    <div>
+        <h3>以下使用 Fetch 測試不同的連線方法</h3>
+        <button onclick="connectPOST()">POST 連線</button>
+        <button onclick="connectGET()">GET 連線</button>
+        <script>
+            async function connectPOST(){
+                let response = await fetch("/test",{method:"POST"});
+                let data = await response.json();
+                console.log(data);
+            }
+            async function connectGET(){
+                let response = await fetch("/test",{method:"GET"});
+                let data = await response.json();
+                console.log(data);
+            }
+        </script>
+        <a href="/test"> 測試 /test 網址</a>
+    </div>
+    <div>
+        <h3>POST request body</h3>
+        <button onclick="connectPOSTBodyString()">POST and body string</button>
+        <button onclick="connectPOSTBodyJSON()">POST and body string(JSON)</button>
+        <button onclick="add()">前後端連線計算</button>
+        <script>
+            async function connectPOSTBodyString(){
+                let response = await fetch("/PostBodyString",{
+                    method:"POST",
+                    body:"任意文本"
+                });
+                let data = await response.json();
+                console.log(data);
+            }
+            async function connectPOSTBodyJSON(){
+                let response = await fetch("/PostBodyJSON",{
+                    method:"POST",
+                    body:JSON.stringify({"x":5})
+                });
+                let data = await response.json();
+                console.log(data);
+            }
+            async function add(){
+                let response = await fetch("/add",{
+                    method:"POST",
+                    body:JSON.stringify({"n1":5, "n2":3})
+                });
+                let data = await response.json();
+                console.log(data);
+            }
+        </script>
+    </div>
+</body>
+</html>
