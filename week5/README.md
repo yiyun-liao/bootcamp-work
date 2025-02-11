@@ -73,7 +73,7 @@
 - - Screenshot: ![task03-6](/week5/source/screenshot-task03-6.png)
 - UPDATE data in name column to test2 where username equals to test.
 - - ```MySQL
-    mysql> UPDATE member SET username='test2' WHERE username='test';
+    mysql> UPDATE member SET name='test2' WHERE username='test';
     ```
 - - Screenshot: ![task03-7](/week5/source/screenshot-task03-7.png)
 
@@ -104,21 +104,53 @@
 ## Task 5: SQL JOIN
 - Create a new table named message, in the website database.
 - - ```MySQL
-
+    mysql> CREATE TABLE message(
+        -> id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'Unique ID',
+        -> member_id BIGINT NOT NULL COMMENT 'Member ID for Message Sender',
+        -> FOREIGN KEY (member_id) REFERENCES member(id),
+        -> content VARCHAR(255) NOT NULL COMMENT 'Content',
+        -> time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+    # 調整 time comment
+    mysql> ALTER TABLE message 
+        -> MODIFY COLUMN time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Publish Time';
+    # 補上 like_count
+    mysql> ALTER TABLE message
+        -> ADD COLUMN like_count INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Like Count' AFTER content;
+    mysql> SHOW FULL COLUMNS FROM message;
     ```
+- - Screenshot: ![task05-1](/week5/source/screenshot-task05-1.png)
+- - Screenshot: ![task05-2](/week5/source/screenshot-task05-2.png)
 - SELECT all messages, including sender names. We have to JOIN the member table to get that.
 - - ```MySQL
-
+    # 增加 message 資料
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(5,'How to make the cake in 30 mins', 246);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(1,'How to make a delicious homemade pasta from scratch',120);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(4,'The secret to perfecting the art of French pastry baking', 375);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(2,'Exploring the vibrant flavors of Thai street food', 429);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(2,'Step-by-step guide to making the perfect sushi rolls', 346);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(3,'A beginner''s guide to Mediterranean cuisine: Must-try dishes', 56);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(1,'The best techniques for grilling steak to perfection', 48);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(5,'How to make authentic Mexican tacos with homemade tortillas', 293);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(4,'Top 5 vegan recipes that everyone will love', 112);
+    mysql> INSERT INTO message (member_id, content, like_count)VALUES(1,'Mastering the art of Indian curry with spices and herbs', 392);
+    # 本題需求
+    mysql> SELECT message.id, member.name AS sender_name, message.content, message.like_count, message.time FROM member INNER JOIN message on message.member_id=member.id;
     ```
+- - Screenshot: ![task05-3](/week5/source/screenshot-task05-3.png)
 - SELECT all messages, including sender names, where sender username equals to test. We have to JOIN the member table to filter and get that.
 - - ```MySQL
-
+    mysql> SELECT message.id, member.name AS sender_name, message.content, message.like_count, message.time
+        -> FROM member INNER JOIN message on message.member_id=member.id
+        -> WHERE member.username='test';
     ```
+- - Screenshot: ![task05-4](/week5/source/screenshot-task05-4.png)
 - Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender username equals to test.
 - - ```MySQL
-
+    mysql> SELECT AVG(message.like_count) FROM member INNER JOIN message ON message.member_id=member.id where member.username='test';
     ```
+- - Screenshot: ![task05-5](/week5/source/screenshot-task05-5.png)
 - Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages GROUP BY sender username.
 - - ```MySQL
-
+    mysql> SELECT member.username, AVG(message.like_count) FROM member INNER JOIN message ON message.member_id=member.id GROUP BY member.username;
     ```
+- - Screenshot: ![task05-6](/week5/source/screenshot-task05-6.png)
