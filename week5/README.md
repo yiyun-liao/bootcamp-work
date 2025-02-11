@@ -24,7 +24,7 @@
 
 ## Task 3: SQL CRUD
 - INSERT a new row to the member table where name, username and password must be set to test. INSERT additional 4 rows with arbitrary data.
-- - ```MySQL
+    - ```MySQL
     mysql> INSET INTO member(name, username, password) VALUES('test', 'test', 'test');
     mysql> INSERT INTO member(name, username, password, follower_count) VALUES
         ->  ('Yun', 'Yun4356', '12345678', 8),
@@ -33,12 +33,12 @@
         ->  ('An', 'wang984984', '98989898', 40);
     ```
 - SELECT all rows from the member table.
-- - ```MySQL
+    - ```MySQL
     mysql> SELECT * FROM member;
     ```
-- - Screenshot: ![task03-1](/week5/source/screenshot-task03-1.png)
+    - Screenshot: ![task03-1](/week5/source/screenshot-task03-1.png)
 - SELECT all rows from the member table, in descending order of time.
-- - ```MySQL
+    - ```MySQL
     # 因為資料同一時間創建，導致 time 一樣，所以增加更改資料即更新時間
     mysql> ALTER TABLE member MODIFY time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
     mysql> UPDATE member SET username = 'YI8778' WHERE name='Yi';
@@ -47,7 +47,7 @@
     # 本題實際需求
     mysql> SELECT * FROM member ORDER BY time DESC;
     ```
-- - Screenshot: ![task03-2](/week5/source/screenshot-task03-2.png)
+    - Screenshot: ![task03-2](/week5/source/screenshot-task03-2.png)
 - SELECT total 3 rows, second to fourth, from the member table, in descending order of time. Note: it does not mean SELECT rows where id are 2, 3, or 4.
 - - ```MySQL
 
