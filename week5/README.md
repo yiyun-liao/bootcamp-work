@@ -81,20 +81,25 @@
 ## Task 4: SQL Aggregation Functions
 - SELECT how many rows from the member table.
 - - ```MySQL
-
+    mysql> SELECT count(*) FROM member; 
     ```
+- - Screenshot: ![task04-1](/week5/source/screenshot-task04-1.png)
 - SELECT the sum of follower_count of all the rows from the member table.
 - - ```MySQL
-
+    mysql> SELECT sum(follower_count) FROM member;
     ```
+- - Screenshot: ![task04-2](/week5/source/screenshot-task04-2.png)
 - SELECT the average of follower_count of all the rows from the member table.
 - - ```MySQL
-
+    mysql> SELECT avg(follower_count) FROM member;
     ```
+- - Screenshot: ![task04-3](/week5/source/screenshot-task04-3.png)
 - SELECT the average of follower_count of the first 2 rows, in descending order of follower_count, from the member table.
 - - ```MySQL
-
+    mysql> SELECT avg(follower_count) FROM (
+        -> SELECT follower_count FROM member ORDER BY follower_count DESC LIMIT 2) AS first_two_avg;
     ```
+- - Screenshot: ![task04-4](/week5/source/screenshot-task04-4.png)
 
 ## Task 5: SQL JOIN
 - Create a new table named message, in the website database.
