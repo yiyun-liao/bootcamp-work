@@ -1,4 +1,3 @@
-# urllib.request.urlopen() ================================================================================
 import urllib.request as req
 import ssl
 import json
