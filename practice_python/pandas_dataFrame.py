@@ -34,3 +34,21 @@ print("新增 Series：", data, sep="\n")
 data["cp"]=data["revenue"]/data["salary"]
 print("誰 cp 值高：", data, sep="\n")
 
+
+# 建立篩選條件（對資料列）
+data2=pd.DataFrame({
+    "name":["Amy", "Bob", "Charles"],
+    "salary":[300000, 400000, 500000],
+},index=["a", "b", "c"])
+
+condition1=[False, True, True]
+filteredData1=data2[condition1]
+print("取第一筆及第三筆資料：", filteredData1, sep="\n")
+
+condition2=data2["salary"]>=400000
+filteredData2=data2[condition2]
+print("薪水高於四萬：", filteredData2, sep="\n")
+
+condition3=data2["name"]=="Amy"
+filteredData3=data2[condition3]
+print("Amy：", filteredData3, sep="\n")
