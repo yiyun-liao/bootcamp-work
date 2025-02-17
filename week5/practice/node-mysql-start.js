@@ -4,7 +4,7 @@ async function connectToMySQL(){
     // 建立連線
     const con = await mysql.createConnection({
         user:"root",
-        password:"Yiyun4356",
+        password:"12345678",
         host:"localhost",
         database:"practice"
     }); 
