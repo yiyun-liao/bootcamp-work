@@ -14,7 +14,7 @@ templates = Jinja2Templates(directory="week6/templates")
 def get_db_connection():
     return mysql.connector.connect(
         user="root",
-        password="Yun4356",
+        password="12345678",
         host="localhost",
         database="website"
     )
