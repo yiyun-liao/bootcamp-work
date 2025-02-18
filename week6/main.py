@@ -86,7 +86,7 @@ def member(request: Request):
     if not request.session.get("SIGNIN"):
         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     
-    print("當前 session 資料:", request.session)
+    # print("當前 session 資料:", request.session)
 
     messages = get_messages()
 
@@ -111,7 +111,7 @@ def error(request: Request, message: str = "Login failed"):
 @app.get("/signout")
 def signout(request:Request):
     request.session.clear() 
-    print("當前 session 資料:", request.session)
+    # print("當前 session 資料:", request.session)
     return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
 
 app.mount("/static", StaticFiles(directory="week6/static"), name="static")
@@ -148,7 +148,6 @@ async def delete_message(request:Request, message_id: int, message_member_id: in
     db=get_db_connection()
     cursor=db.cursor(dictionary=True)
     cursor.execute("DELETE FROM message where id=%s and member_id=%s",(message_id, message_member_id))
-    data=cursor.fetchall()
     print("成功刪除")
     db.commit()
     db.close()

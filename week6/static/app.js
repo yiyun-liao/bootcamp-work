@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function(){
         })
 
         async function deleteMessage(messageId, messageMemberId) {
-            console.log(messageId, messageMemberId)
+            // console.log(messageId, messageMemberId)
             const isConfirmed = confirm("確定要刪除這則留言嗎？");
             if (!isConfirmed){
                 return;
