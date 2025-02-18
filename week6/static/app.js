@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
-    const form = document.querySelector('form');
-    const checkbox = document.getElementById('agree-policy');
+    // const form = document.querySelector('form');
+    // const checkbox = document.getElementById('agree-policy');
 
     // form.addEventListener('submit',async function(event){
     //     console.log("Submit button clicked");
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function(){
         passwordError.textContent= password.value === "" ? "密碼不得空白" : "";
         submit.disabled = name.value === "" || username.value === "" || password.value === "";
     }
-    
+
     name.addEventListener('input',validateInputs);
     username.addEventListener('input',validateInputs);
     password.addEventListener('input',validateInputs);
