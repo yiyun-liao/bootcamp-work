@@ -3,33 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week4 FastAPI</title>
+    <title>{{ pageTitle }}</title>
     <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', path='app.js') }}" defer></script>
+    <script src="{{ url_for('static', path='/app.js') }}" defer></script>
 </head>
 <body>
     <header>
         <h1>{{ title }}</h1> 
     </header>
     <main>
-        <h2>{{ subtitle }}</h2>
-        <form action="/signin" method="post">
-            <div class="input-style">
-                <label for="username">帳號</label>
-                <input type="text" name="username" id="username" autocomplete="username"> 
-            </div>
-            <div class="input-style">
-                <label for="password">密碼</label>
-                <input type="password" name="password" id="password" autocomplete="new-password">
-            </div>
-            <div class="input-style">
-                <label for="agree-policy">同意條款</label>
-                <input type="checkbox" id="agree-policy" name="agree-policy">
-            </div>
-            <div class="input-style">
-                <input type="submit" value="登入">
-            </div>
-        </form>
+        <div class="main-section">
+            <h2>註冊帳號</h2>
+            <form action="/signin" method="post">
+                <div class="input-style">
+                    <label for="name">姓名</label>
+                    <input type="text" name="name" id="name"> 
+                </div>
+                <div class="input-style">
+                    <label for="signin_username">帳號</label>
+                    <input type="text" name="signin_username" id="signin_username" autocomplete="username"> 
+                </div>
+                <div class="input-style">
+                    <label for="signin_password">密碼</label>
+                    <input type="password" name="signin_password" id="signin_password" autocomplete="new-password">
+                </div>
+                <div class="input-style">
+                    <input type="submit" value="註冊">
+                </div>
+            </form>
+        </div>
+        <div class="main-section">
+            <h2>登入系統</h2>
+            <form action="/login" method="post">
+                <div class="input-style">
+                    <label for="login_username">帳號</label>
+                    <input type="text" name="login_username" id="login_username" autocomplete="username"> 
+                </div>
+                <div class="input-style">
+                    <label for="login_password">密碼</label>
+                    <input type="password" name="login_password" id="login_password" autocomplete="current-password">
+                </div>
+                <div class="input-style">
+                    <input type="submit" value="登入">
+                </div>
+            </form>
+        </div>
     </main>
 </body>
 </html>

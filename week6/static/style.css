@@ -24,9 +24,7 @@ h1{
 
 
 main{
-    max-width: 600px;
     margin: auto;
-    padding: 32px 0;
 }
 
 h2{
@@ -39,8 +37,15 @@ h3{
     margin: 0;
     text-align: center;
 }
+
+.main-section{
+    padding: 80px 0px;
+    border-bottom: 2px solid rgb(19, 64, 128);
+}
+
 form{
     font-size: 24px;
+    padding: auto;
 }
 
 .input-style{
@@ -55,7 +60,7 @@ form{
     min-width: 64px;
 }
 
-.input-style input:not([type="checkbox"]) {
+.input-style input {
     font: inherit;
     border: 1px solid rgb(204, 204, 204);
     border-radius: 4px;
@@ -65,13 +70,6 @@ form{
 
 .input-style input:focus {
     border: 2px solid rgb(19, 64, 128);
-}
-  
-.input-style input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    min-width: unset;
 }
 
 .input-style input[type="submit"] {

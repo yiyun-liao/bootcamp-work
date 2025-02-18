@@ -2,16 +2,16 @@ document.addEventListener('DOMContentLoaded', function(){
     const form = document.querySelector('form');
     const checkbox = document.getElementById('agree-policy');
 
-    form.addEventListener('submit',async function(event){
-        console.log("Submit button clicked");
-        if(!checkbox.checked){
-            event.preventDefault();
-            alert('Please check the checkbox first');
-            console.log("Checkbox is not checked! Form submission prevented.");
-        }
-        // event.preventDefault();
-        // await signin();
-    });
+    // form.addEventListener('submit',async function(event){
+    //     console.log("Submit button clicked");
+    //     if(!checkbox.checked){
+    //         event.preventDefault();
+    //         alert('Please check the checkbox first');
+    //         console.log("Checkbox is not checked! Form submission prevented.");
+    //     }
+    //     // event.preventDefault();
+    //     // await signin();
+    // });
 })
 
 // // 使用表單格式
