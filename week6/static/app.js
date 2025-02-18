@@ -14,6 +14,30 @@ document.addEventListener('DOMContentLoaded', function(){
     // });
 })
 
+document.addEventListener('DOMContentLoaded', function(){
+    const form = document.getElementById('signup_form');
+    const name = document.getElementById('signup_name');
+    const username = document.getElementById('signup_username');
+    const password = document.getElementById('signup_password');
+    const submit = document.getElementById('signup_submit');
+
+    const nameError = document.getElementById('signup_name_error');
+    const usernameError = document.getElementById('signup_username_error');
+    const passwordError = document.getElementById('signup_password_error');  
+    
+    function validateInputs(){
+        nameError.textContent= name.value === "" ? "姓名不得空白" : "";
+        usernameError.textContent= username.value === "" ? "帳號不得空白" : "";
+        passwordError.textContent= password.value === "" ? "密碼不得空白" : "";
+        submit.disabled = name.value === "" || username.value === "" || password.value === "";
+    }
+    
+    name.addEventListener('input',validateInputs);
+    username.addEventListener('input',validateInputs);
+    password.addEventListener('input',validateInputs);
+
+})
+
 // // 使用表單格式
 // async function signin(){
 //     const formData = new URLSearchParams();

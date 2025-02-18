@@ -18,6 +18,12 @@ def index(request: Request):
         "title": "歡迎光臨，請註冊登入系統",
     })
 
+@app.get("/signup")
+async def signup(request:Request, signup_name:str = Form(...), signup_username:str = Form(...), signup_password:str = Form(...)):
+    print(signup_name, signup_username, signup_password)
+    
+
+
 @app.post("/login")
 async def login(request: Request, login_username: str = Form(...), login_password: str = Form(...)):
     print(login_username, login_password) #"test" , "test"
