@@ -73,18 +73,24 @@ async def login(request: Request, signin_username: str = Form(...), signin_passw
         db.close()
         print("登入成功", user_is_member)
         request.session["SIGNIN"] = True
+        request.session["member_id"] = user_is_member['id']
+        request.session['username'] = user_is_member['username']
+        request.session['name'] = user_is_member['name']
         return RedirectResponse("/member", status_code=HTTP_303_SEE_OTHER)
 
 
 @app.get("/member")
-def member(request: Request, username: str = "您好"):
+def member(request: Request):
     if not request.session.get("SIGNIN"):
         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+    
+    name=request.session.get("name")
+
     return templates.TemplateResponse("member.html", {
         "request": request,
         "pageTitle": "week6 member system",
         "title": "歡迎光臨，這是會員頁",
-        "username": username
+        "username": name
         })
 
 @app.get("/error")
