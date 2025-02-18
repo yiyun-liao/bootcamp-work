@@ -33,21 +33,13 @@
     </div>
     <div class="main-section">
         <ol>
+            {% for message in messages %}
             <li>
-                <p class="message-member-name">說話的人</p>
+                <p class="message-member-name">{{ message.member_id }}</p>
                 <p>：</p>
-                <p class="message-content">說了什麼話</p>
+                <p class="message-content">{{ message.content }}</p>
             </li>
-            <li>
-                <p class="message-member-name">說話人</p>
-                <p>：</p>
-                <p class="message-content">說了什麼話說了什麼話說了什麼話</p>
-            </li>
-            <li>
-                <p class="message-member-name">說話的人的人的人</p>
-                <p>：</p>
-                <p class="message-content">說了什麼話說了什麼話說了什麼話說了什麼話說了什麼話說了什麼話</p>
-            </li>
+            {% endfor %}
         </ol>
     </div>
 </body>

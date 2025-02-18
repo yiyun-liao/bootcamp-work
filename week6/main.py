@@ -38,7 +38,7 @@ async def signup(request:Request, signup_name:str = Form(...), signup_username:s
     cursor=db.cursor(dictionary=True)
 
     # 檢查帳號是否已經存在
-    cursor.execute("SELECT * FROM member WHERE username=%s", (signup_username,))
+    cursor.execute("SELECT * FROM member WHERE username=%s;", (signup_username,))
     user_is_exited = cursor.fetchone()
 
     # 存在
@@ -48,7 +48,7 @@ async def signup(request:Request, signup_name:str = Form(...), signup_username:s
         return RedirectResponse(url="/error?message=帳號或密碼不正確，請重新登入", status_code=HTTP_303_SEE_OTHER)
     
     # 不存在
-    cursor.execute("INSERT INTO member (name, username, password) VALUES (%s, %s, %s)",(signup_name, signup_username, signup_password))
+    cursor.execute("INSERT INTO member (name, username, password) VALUES (%s, %s, %s);",(signup_name, signup_username, signup_password))
     db.commit()
     db.close()
     print(f"註冊成功 {signup_username} 已加入資料庫")
@@ -64,7 +64,7 @@ async def login(request: Request, signin_username: str = Form(...), signin_passw
     db=get_db_connection()
     cursor=db.cursor(dictionary=True)
 
-    cursor.execute("SELECT * FROM member WHERE username=%s and password =%s", (signin_username, signin_password))
+    cursor.execute("SELECT * FROM member WHERE username=%s and password =%s;", (signin_username, signin_password))
     user_is_member=cursor.fetchone()
     if user_is_member is None:
         print("登入失敗")
@@ -87,13 +87,16 @@ def member(request: Request):
         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     
     print("當前 session 資料:", request.session)
-    name=request.session.get("name")
 
+    messages = get_messages()
+
+    name=request.session.get("name")
     return templates.TemplateResponse("member.html", {
         "request": request,
         "pageTitle": "week6 member system",
         "title": "歡迎光臨，這是會員頁",
-        "username": name
+        "username": name,
+        "messages": messages
         })
 
 @app.get("/error")
@@ -112,3 +115,24 @@ def signout(request:Request):
     return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
 
 app.mount("/static", StaticFiles(directory="week6/static"), name="static")
+
+@app.post("/createMessage")
+def create_message(request:Request, create_message: str = Form(...)):
+    member_id = request.session.get("id")
+    print(f"{member_id} 傳送了 {create_message}")
+
+    db=get_db_connection()
+    cursor=db.cursor(dictionary=True)
+
+    cursor.execute("INSERT INTO (member_id, content) VALUES (%s, %s);", (member_id, create_message))
+
+def get_messages():
+    get_message = get_db_connection()
+    get_message_cursor = get_message.cursor(dictionary=True)
+    get_message_cursor.execute("SELECT * FROM message;")
+    messages=get_message_cursor.fetchall()
+    get_message.commit()
+    get_message.close()
+    print(messages)
+    return messages
+        
