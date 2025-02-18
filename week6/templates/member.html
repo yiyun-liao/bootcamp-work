@@ -39,7 +39,9 @@
                 <p class="message-member-name">{{ message.name }}</p>
                 <p>：</p>
                 <p class="message-content">{{ message.content }}</p>
-                <i class="mdi mdi-close" id="close-aside"></i>
+                {% if message.member_id == request.session.get("member_id") %}
+                <i class="mdi mdi-close" message-id="{{ message.id }}" message-member-id="{{ message.member_id }}" ></i>
+                {% endif %}
             </li>
             {% endfor %}
         </ol>

@@ -46,5 +46,34 @@ document.addEventListener('DOMContentLoaded', function(){
             createMessageSubmit.disabled = createMessageContent.value === "";
         }
         createMessageContent.addEventListener('input',createMessage);
+
+        // deleteMessage
+        document.querySelectorAll('.mdi-close').forEach(button => {
+            button.addEventListener('click', function(){
+                const messageId = this.getAttribute('message-id');
+                const messageMemberId = this.getAttribute('message-member-id');
+                deleteMessage(messageId, messageMemberId);
+            });
+        })
+
+        async function deleteMessage(messageId, messageMemberId) {
+            console.log(messageId, messageMemberId)
+            const isConfirmed = confirm("確定要刪除這則留言嗎？");
+            if (!isConfirmed){
+                return;
+            }
+            try{
+                const response = await fetch(`/deleteMessage/${messageId}/${messageMemberId}`,{
+                    method:'DELETE',
+                });
+                if (!response.ok) {
+                    throw new Error("Could not fetch");
+                }
+                window.location.reload();
+            } catch (error){
+                console.error("Error fetching data:", error);
+            }
+        }
+
     }
 })

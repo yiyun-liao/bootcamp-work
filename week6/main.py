@@ -45,7 +45,7 @@ async def signup(request:Request, signup_name:str = Form(...), signup_username:s
     if user_is_exited:
         print(f"註冊失敗 {user_is_exited['username'] } 已經存在")
         db.close()
-        return RedirectResponse(url="/error?message=帳號或密碼不正確，請重新登入", status_code=HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/error?message=帳號或密碼不正確，請重新登入註冊", status_code=HTTP_303_SEE_OTHER)
     
     # 不存在
     cursor.execute("INSERT INTO member (name, username, password) VALUES (%s, %s, %s);",(signup_name, signup_username, signup_password))
@@ -140,3 +140,16 @@ def get_messages():
     # print(messages)
     return messages
         
+@app.delete("/deleteMessage/{message_id}/{message_member_id}")
+async def delete_message(request:Request, message_id: int, message_member_id: int):
+    if not request.session.get('SIGNIN'):
+        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+    print(message_id, message_member_id)
+    db=get_db_connection()
+    cursor=db.cursor(dictionary=True)
+    cursor.execute("DELETE FROM message where id=%s and member_id=%s",(message_id, message_member_id))
+    data=cursor.fetchall()
+    print("成功刪除")
+    db.commit()
+    db.close()
+    return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
