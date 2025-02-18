@@ -29,7 +29,7 @@ def index(request: Request):
 
 @app.post("/signup")
 async def signup(request:Request, signup_name:str = Form(...), signup_username:str = Form(...), signup_password:str = Form(...)):
-    print(signup_name, signup_username, signup_password)
+    print(f"註冊帳號：姓名： {signup_name}, 帳號：{signup_username}, 密碼：{signup_password}")
 
     # 連線
     db=get_db_connection()
@@ -41,9 +41,9 @@ async def signup(request:Request, signup_name:str = Form(...), signup_username:s
 
     # 存在
     if user_is_exited:
-        print("註冊失敗", user_is_exited)
+        print(f"註冊失敗 {user_is_exited['username'] } 已經存在")
         db.close()
-        return RedirectResponse(url="/error?message=帳號密碼錯誤，請重新註冊或登入", status_code=HTTP_303_SEE_OTHER)
+        return RedirectResponse(url="/error?message=帳號或密碼不正確，請重新登入", status_code=HTTP_303_SEE_OTHER)
     
     # 不存在
     cursor.execute("INSERT INTO member (name, username, password) VALUES (%s, %s, %s)",(signup_name, signup_username, signup_password))
@@ -55,30 +55,37 @@ async def signup(request:Request, signup_name:str = Form(...), signup_username:s
 
 
 
-# @app.post("/login")
-# async def login(request: Request, login_username: str = Form(...), login_password: str = Form(...)):
-#     print(login_username, login_password) #"test" , "test"
-#     if not login_username or not login_password:
-#         return RedirectResponse(url="/error?message=請完整輸入帳號密碼", status_code=HTTP_303_SEE_OTHER)
-#     if login_username != "test":
-#         return RedirectResponse(url="/error?message=帳號不存在，請重新登入", status_code=HTTP_303_SEE_OTHER)
-#     if login_password != "test":
-#         return RedirectResponse(url="/error?message=密碼錯誤，請重新輸入", status_code=HTTP_303_SEE_OTHER)
-#     else:
-#         request.session["LOG-IN"] = True
-#         return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
+@app.post("/signin")
+async def login(request: Request, signin_username: str = Form(...), signin_password: str = Form(...)):
+    print(signin_username, signin_password) 
+
+    db=get_db_connection()
+    cursor=db.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM member WHERE username=%s and password =%s", (signin_username, signin_password))
+    user_is_member=cursor.fetchone()
+    if user_is_member is None:
+        print("登入失敗")
+        db.close()
+        return RedirectResponse(url="/error?message=帳號或密碼不正確，請重新登入",status_code=HTTP_303_SEE_OTHER)
+    else:
+        db.commit()
+        db.close()
+        print("登入成功", user_is_member)
+        request.session["SIGNIN"] = True
+        return RedirectResponse("/member", status_code=HTTP_303_SEE_OTHER)
 
 
-# @app.get("/member")
-# def member(request: Request, username: str = "您好"):
-#     if not request.session.get("LOG-IN"):
-#         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
-#     return templates.TemplateResponse("member.html", {
-#         "request": request,
-#         "pageTitle": "week6 member system",
-#         "title": "歡迎光臨，這是會員頁",
-#         "username": username
-#         })
+@app.get("/member")
+def member(request: Request, username: str = "您好"):
+    if not request.session.get("SIGNIN"):
+        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+    return templates.TemplateResponse("member.html", {
+        "request": request,
+        "pageTitle": "week6 member system",
+        "title": "歡迎光臨，這是會員頁",
+        "username": username
+        })
 
 @app.get("/error")
 def error(request: Request, message: str = "Login failed"):
@@ -89,9 +96,9 @@ def error(request: Request, message: str = "Login failed"):
         "subtitle": message
     })
 
-# @app.get("/signout")
-# def signout(request:Request):
-#     request.session.clear() 
-#     return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+@app.get("/signout")
+def signout(request:Request):
+    request.session.clear() 
+    return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
 
 app.mount("/static", StaticFiles(directory="week6/static"), name="static")
