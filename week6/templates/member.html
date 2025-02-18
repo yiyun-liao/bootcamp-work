@@ -19,15 +19,15 @@
     </div>
     <div class="main-section">
         <h2>快來留言吧</h2>
-        <form action="/createMessage" method="post" id="message_form">
+        <form action="/createMessage" method="post" id="create_message_form">
             <div class="input-section">
                 <div class="input-style">
                     <label for="create_message">內容</label>
-                    <input type="text" name="create_message" id="create_message"> 
+                    <input type="text" name="create_message_content" id="create_message_content"> 
                 </div>
             </div>
             <div class="input-style-submit">
-                <input type="submit" value="送出" id="create_message_submit">
+                <input type="submit" value="送出" id="create_message_submit" disabled>
             </div>
         </form>
     </div>
@@ -35,7 +35,7 @@
         <ol>
             {% for message in messages %}
             <li>
-                <p class="message-member-name">{{ message.member_id }}</p>
+                <p class="message-member-name">{{ message.name }}</p>
                 <p>：</p>
                 <p class="message-content">{{ message.content }}</p>
             </li>

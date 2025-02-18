@@ -117,22 +117,26 @@ def signout(request:Request):
 app.mount("/static", StaticFiles(directory="week6/static"), name="static")
 
 @app.post("/createMessage")
-def create_message(request:Request, create_message: str = Form(...)):
-    member_id = request.session.get("id")
-    print(f"{member_id} 傳送了 {create_message}")
+def create_message(request:Request, create_message_content: str = Form(...)):
+    member_id = request.session.get("member_id")
+    print(f"{member_id} 傳送了 {create_message_content}")
 
-    db=get_db_connection()
-    cursor=db.cursor(dictionary=True)
+    create_message=get_db_connection()
+    create_message_cursor=create_message.cursor(dictionary=True)
 
-    cursor.execute("INSERT INTO (member_id, content) VALUES (%s, %s);", (member_id, create_message))
+    create_message_cursor.execute("INSERT INTO message (member_id, content) VALUES (%s, %s);", (member_id, create_message_content))
+    create_message.commit()
+    create_message.close()    
+    return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
+ 
 
 def get_messages():
     get_message = get_db_connection()
     get_message_cursor = get_message.cursor(dictionary=True)
-    get_message_cursor.execute("SELECT * FROM message;")
+    get_message_cursor.execute("SELECT message.id, member.id AS member_id, member.name, message.content FROM message INNER JOIN member ON message.member_id=member.id ORDER BY message.id DESC ;")
     messages=get_message_cursor.fetchall()
     get_message.commit()
     get_message.close()
-    print(messages)
+    # print(messages)
     return messages
         
