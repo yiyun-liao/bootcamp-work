@@ -122,10 +122,12 @@ ol{
 }
 
 li{
+    position: relative;
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 4px;
+    border-radius: 4px;
 }
 
 ol p{
@@ -137,4 +139,30 @@ ol p{
     min-width: 160px;
     text-align: right;
     font-weight: 700;
+}
+
+.message-content{
+    margin-right: 32px;
+}
+
+i.mdi{
+    position: absolute;
+    right: 4px;
+    font-size: 24px; 
+    width: 24px;
+    height: 24px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+i.mdi:hover{
+    background-color: rgb(188, 210, 240);
+    color:rgb(13, 43, 85) ;
+}
+
+li:hover{
+    background-color: rgb(233, 238, 246);
 }
