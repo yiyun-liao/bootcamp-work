@@ -17,5 +17,38 @@
             <h3><a href="/signout">登出系統</a></h3>
         </main>
     </div>
+    <div class="main-section">
+        <h2>快來留言吧</h2>
+        <form action="/createMessage" method="post" id="message_form">
+            <div class="input-section">
+                <div class="input-style">
+                    <label for="create_message">內容</label>
+                    <input type="text" name="create_message" id="create_message"> 
+                </div>
+            </div>
+            <div class="input-style-submit">
+                <input type="submit" value="送出" id="create_message_submit">
+            </div>
+        </form>
+    </div>
+    <div class="main-section">
+        <ol>
+            <li>
+                <p class="message-member-name">說話的人</p>
+                <p>：</p>
+                <p class="message-content">說了什麼話</p>
+            </li>
+            <li>
+                <p class="message-member-name">說話人</p>
+                <p>：</p>
+                <p class="message-content">說了什麼話說了什麼話說了什麼話</p>
+            </li>
+            <li>
+                <p class="message-member-name">說話的人的人的人</p>
+                <p>：</p>
+                <p class="message-content">說了什麼話說了什麼話說了什麼話說了什麼話說了什麼話說了什麼話</p>
+            </li>
+        </ol>
+    </div>
 </body>
 </html>

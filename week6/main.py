@@ -21,6 +21,8 @@ def get_db_connection():
 
 @app.get("/")
 def index(request: Request):
+    if request.session.get("SIGNIN") is True:
+        return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
     return templates.TemplateResponse("index.html",{
         "request": request,
         "pageTitle": "week6 member system",
@@ -84,6 +86,7 @@ def member(request: Request):
     if not request.session.get("SIGNIN"):
         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     
+    print("當前 session 資料:", request.session)
     name=request.session.get("name")
 
     return templates.TemplateResponse("member.html", {
@@ -105,6 +108,7 @@ def error(request: Request, message: str = "Login failed"):
 @app.get("/signout")
 def signout(request:Request):
     request.session.clear() 
+    print("當前 session 資料:", request.session)
     return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
 
 app.mount("/static", StaticFiles(directory="week6/static"), name="static")
