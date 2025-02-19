@@ -16,6 +16,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*__pycache__/
 
 
 # 日誌與暫存檔案
