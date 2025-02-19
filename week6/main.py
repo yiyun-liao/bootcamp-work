@@ -5,16 +5,24 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.status import HTTP_303_SEE_OTHER
 from fastapi.templating import Jinja2Templates
 import mysql.connector
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+PASSWORD = os.getenv("PASSWORD")
 
 
 app = FastAPI()
-app.add_middleware(SessionMiddleware, secret_key="your_secret_key")
+app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 templates = Jinja2Templates(directory="week6/templates")
+
 
 def get_db_connection():
     return mysql.connector.connect(
         user="root",
-        password="12345678",
+        password=PASSWORD,
         host="localhost",
         database="website"
     )
