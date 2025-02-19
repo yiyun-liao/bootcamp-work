@@ -15,6 +15,8 @@ venv/
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+
 
 # 日誌與暫存檔案
 *.log
