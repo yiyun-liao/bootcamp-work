@@ -51,19 +51,18 @@ document.addEventListener('DOMContentLoaded', function(){
         document.querySelectorAll('.mdi-close').forEach(button => {
             button.addEventListener('click', function(){
                 const messageId = this.getAttribute('message-id');
-                const messageMemberId = this.getAttribute('message-member-id');
-                deleteMessage(messageId, messageMemberId);
+                deleteMessage(messageId);
             });
         })
 
-        async function deleteMessage(messageId, messageMemberId) {
-            // console.log(messageId, messageMemberId)
+        async function deleteMessage(messageId) {
+            console.log(messageId)
             const isConfirmed = confirm("確定要刪除這則留言嗎？");
             if (!isConfirmed){
                 return;
             }
             try{
-                const response = await fetch(`/deleteMessage/${messageId}/${messageMemberId}`,{
+                const response = await fetch(`/deleteMessage/${messageId}`,{
                     method:'DELETE',
                 });
                 if (!response.ok) {
