@@ -149,14 +149,14 @@ def get_messages():
     # print(messages)
     return messages
         
-@app.delete("/deleteMessage/{message_id}/{message_member_id}")
-async def delete_message(request:Request, message_id: int, message_member_id: int):
+@app.delete("/deleteMessage/{message_id}")
+async def delete_message(request:Request, message_id: int):
     if not request.session.get('SIGNIN'):
         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
-    print(message_id, message_member_id)
+    print(message_id)
     db=get_db_connection()
     cursor=db.cursor(dictionary=True)
-    cursor.execute("DELETE FROM message where id=%s and member_id=%s",(message_id, message_member_id))
+    cursor.execute("DELETE FROM message where id=%s",(message_id,))
     print("成功刪除")
     db.commit()
     db.close()
