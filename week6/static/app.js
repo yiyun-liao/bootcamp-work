@@ -12,11 +12,15 @@ document.addEventListener('DOMContentLoaded', function(){
         const usernameError = document.getElementById('signup_username_error');
         const passwordError = document.getElementById('signup_password_error');  
         
+        const inputRule = /^[A-Za-z0-9]{2,}$/;
         function validateSignupInputs(){
-            nameError.textContent= name.value === "" ? "姓名不得空白" : "";
-            usernameError.textContent= username.value === "" ? "帳號不得空白" : "";
-            passwordError.textContent= password.value === "" ? "密碼不得空白" : "";
-            submit.disabled = name.value === "" || username.value === "" || password.value === "";
+            nameError.textContent= name.value === "" ? "姓名不得空白" 
+                : (!inputRule.test(name.value) ? "姓名只能包含英數字，且至少 2 個字元" : "");
+            usernameError.textContent= username.value === "" ? "帳號不得空白" 
+                : (!inputRule.test(username.value) ? "帳號只能包含英數字，且至少 2 個字元" : "");
+            passwordError.textContent= password.value === "" ? "密碼不得空白" 
+                : (!inputRule.test(password.value) ? "帳號只能包含英數字，且至少 2 個字元" : "");
+            submit.disabled = !(nameError.textContent === "" && usernameError.textContent === "" && passwordError.textContent === "");
         }
     
         document.getElementById('signup_form').addEventListener('input', validateSignupInputs);
@@ -29,10 +33,20 @@ document.addEventListener('DOMContentLoaded', function(){
         const signinUsernameError = document.getElementById('signin_username_error');
         const signinPasswordError = document.getElementById('signin_password_error');  
         
+        function validateSignupInputs(){
+            usernameError.textContent= username.value === "" ? "帳號不得空白" 
+                : (!inputRule.test(username.value) ? "帳號只能包含英數字，且至少 2 個字元" : "");
+            passwordError.textContent= password.value === "" ? "密碼不得空白" 
+                : (!inputRule.test(password.value) ? "帳號只能包含英數字，且至少 2 個字元" : "");
+            submit.disabled = !(nameError.textContent === "" && usernameError.textContent === "" && passwordError.textContent === "");
+        }
+
         function validateSigninInputs(){
-            signinUsernameError.textContent= signinUsername.value === "" ? "帳號不得空白" : "";
-            signinPasswordError.textContent= signinPassword.value === "" ? "密碼不得空白" : "";
-            signinSubmit.disabled = signinUsername.value === "" || signinPassword.value === "";
+            signinUsernameError.textContent= signinUsername.value === "" ? "帳號不得空白" 
+                : (!inputRule.test(signinUsername.value) ? "帳號只能包含英數字，且至少 2 個字元" : "");
+            signinPasswordError.textContent= signinPassword.value === "" ? "密碼不得空白" 
+                : (!inputRule.test(signinPassword.value) ? "帳號只能包含英數字，且至少 2 個字元" : "");
+            signinSubmit.disabled = !(signinUsernameError.textContent === "" && signinPasswordError.textContent === "");
         }
     
         document.getElementById('signin_form').addEventListener('input',validateSigninInputs);
@@ -41,9 +55,20 @@ document.addEventListener('DOMContentLoaded', function(){
     if(path==='/member'){
         // createMessage
         const createMessageContent = document.getElementById('create_message_content');
+        const createMessageError = document.getElementById('create_message_error');
         const createMessageSubmit = document.getElementById('create_message_submit');
+        const inputRule = /^[\p{L}\p{N}]+$/u;
         function createMessage(){
-            createMessageSubmit.disabled = createMessageContent.value === "";
+            if (createMessageContent.value === ""){
+                createMessageError.textContent="";
+                createMessageSubmit.disabled = true;
+            }else if(createMessageContent.value.length > 40){
+                createMessageError.textContent="請少於 40 個字元";
+                createMessageSubmit.disabled = true;
+            }else{
+                createMessageError.textContent="";
+                createMessageSubmit.disabled = false;
+            }
         }
         createMessageContent.addEventListener('input',createMessage);
 
