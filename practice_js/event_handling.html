@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event_handling</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #bfe9c9;
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid #7ace81;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h3>event_handling</h3>
+    <p>其實用 css Pseudo selectors（偽選擇器） 完成會更方便</p>
+    <button
+        onclick="console.log('點擊事件');"
+        onmouseover="console.log('滑鼠移入');"
+        onmouseout="console.log('滑鼠移出');"
+        onmousedown="console.log('滑鼠點下');"
+        onmouseup="console.log('滑鼠放開');"
+    >click me</button>
+
+    <button 
+        class="btn" 
+        onmouseover="over(this);"
+        onmouseout="out(this);"
+        onmousedown="down(this);"
+        onmouseup="up(this);"
+    >hover to change state</button>
+    <script>
+        function over(elem){
+            elem.style.backgroundColor="#93da98";
+        }
+        function out(elem){
+            elem.style.backgroundColor="#bfe9c9";
+        }
+        function down(elem){
+            elem.style.borderWidth="5px";
+        }
+        function up(elem){
+            elem.style.borderWidth="1px";
+        }
+    </script>
+</body>
+</html>
