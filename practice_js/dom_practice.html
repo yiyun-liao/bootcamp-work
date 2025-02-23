@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML DOM 畫面操作</title>
+</head>
+<body>
+    <div>
+        <span onclick="changeToExps();">關於我</span>
+        <span onclick="changeToAbout();">學經歷</span>
+    </div>
+    <div id="about">大家好，我是 Yun</div>
+    <div id="exps" style="display: none;">現在在複習 js</div>
+    <script>
+        let aboutDiv = document.getElementById("about");
+        let expsDiv = document.getElementById("exps");
+        function changeToExps(){
+            aboutDiv.style.display = "none";
+            exps.style.display = "block";
+        }
+        function changeToAbout(){
+            aboutDiv.style.display = "block";
+            exps.style.display = "none";
+        }
+
+    </script>
+</body>
+</html>
