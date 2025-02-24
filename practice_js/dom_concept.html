@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom_concept</title>
+    <style>
+        .text{text-decoration: underline; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <script>
+        // window 物件
+        console.log(window);
+        // 取得視窗寬度和高度
+        console.log(innerHeight, innerWidth);
+        
+        // 認識 document 物件，取得螢幕尺寸
+        console.log(window.screen.height, window.screen.width);
+        // 取得網址列的內容
+        console.log(window.location.href);
+        // 更改網址列的內容
+        // window.location.href="https://www.google.com/";
+        
+        // 認識 document 物件
+        console.log(window.document)
+        console.dir(document) // 程式化細節
+        // 取得網頁標題
+        console.log(document.title)
+        // 更改網頁標題
+        document.title="新標題";
+        // 取得 body 標籤
+        console.log(document.body);
+        // 更改網頁主畫面的內容（Body 標籤的內文）
+        console.log(document.body.innerHTML)
+        document.body.innerHTML="測試測試";
+    </script>
+    
+
+    <h3>HTML DOM 畫面操作</h3>
+    <div id="content">練習網頁畫面操作</div>
+    <button onclick="change();">點我</button>
+    <script>
+        //全部“取代”原本的內容
+        function change(){
+            // 整個畫面被換掉
+            // document.body.innerHTML="新的內容" ;
+            // 取得標籤物件
+            let elem = document.getElementById("content");
+            //  或是：let elem = document.querySelector("#content");
+            // 操作標籤物件
+            elem.innerHTML = "新的內容" ;
+            elem.className = "text" ; // 寫 css 對應
+            elem.style.fontSize="30px"; // 直接給特定 css 屬性
+        }
+    </script>
+</body>
+</html>

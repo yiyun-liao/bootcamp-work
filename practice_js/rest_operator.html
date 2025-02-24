@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rest_operator</title>
+</head>
+<body>
+    <script>
+        // 運用在解構賦值 ===========================================================================
+
+        // array
+        let [n1, n2 , ...data] = [3, 4, 5, 6, 2];
+        console.log(n1,n2,data) // 3 , 4, [5 ,6, 2]
+
+        // object
+        let {x, z, ...obj} = {x:3, y:4, z:3, a:5, b:6}
+        console.log(x, y, obj) // 3 , 3, {y:4, a:5, b:6}
+
+        // 運用在函式參數 ===========================================================================
+        function add(n1, n2, ...args) {
+            let total = n1 + n2;
+            for(let i=0; i<args.length ; i++){
+                total = total + args[i];
+            }
+            console.log(total);
+        }
+        add(3, 4); // output 7
+        add(5, 6, 1, 2); // output 14
+        add(1, 2, 3, 1, 1); // output 8
+    </script>
+</body>
+</html>

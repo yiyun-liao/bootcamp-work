@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function</title>
+</head>
+<body>
+    <script>
+        // 計算 1+2+3+...+10 
+        function calculate(num){
+            let result = 0;
+            let n=1;
+            while(n <= num){
+                result += n;
+                n++;
+            }
+            console.log("function: ", result)
+        }
+        calculate(10);
+        calculate(20);
+
+        // arrow function1
+        let calculate2 = (num) => {
+            let result = 0;
+            let n=1;
+            while(n <= num){
+                result += n;
+                n++;
+            }
+            return result
+        }
+
+        ans1 = calculate2(10);
+        ans2 = calculate2(20);  
+        console.log("arrow function1: ", ans1, ans2);
+
+        // arrow function2
+        let calculate3 = num => (num + 1) * num /2
+
+        ans1 = calculate3(10);
+        ans2 = calculate3(20);  
+        console.log("arrow function2: ", ans1, ans2);
+        </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>destructuring_assignment</title>
+</head>
+<body>
+    <script>
+        // 陣列的解構賦值 ===========================================================================
+        let arr = [3,4,5];
+        let d1 = arr[0];
+        let d2 = arr[1];
+        let d3 = arr[2];
+
+        // 方法一
+        let e1,e2,e3,e4;
+        [e1, e2 ,e3, e4] = arr; //3,4,5 undefined
+        [e1, e2 ,e3=22, e4=10] = arr; 
+        console.log("使用預設值：", e1, e2, e3, e4) //3,4,5,10
+
+        // 方法二
+        let n1 = 3;
+        let n2 = 4;
+        [n2,n1]=[n1,n2];
+        console.log("互換值：",n1,n2) // 互換值：4,3
+
+        // 物件的解構賦值 ===========================================================================
+        // 變數名稱應該與 obj 的屬性名稱一致
+
+        let obj = {x:3, y:4};
+        // let x = obj.x;
+        // let y = obj.y;
+
+        // 方法一        
+        // let {x,y} = obj;
+        // console.log(x, y);
+        
+        // 方法二
+        // let x ,y;
+        // ({x,y} = obj);
+        // console.log(x, y);
+
+        // 方法三
+        let x ,y, z;
+        ({x,y=12,z=20} = obj);
+        console.log("使用預設值：", x, y, z); //3,4,20
+
+        // 改變變數名稱
+        let newX, newY, newZ;
+        ({x:newX , y:newY=12 , z:newZ=20} = obj);
+        console.log("改變變數名稱：", newX, newY, newZ); //3,4,20  
+        
+        // 簡化函式物件參數 ===========================================================================
+        function add(args){
+            console.log("函式物件參數：", args.n1+args.n2);
+        }
+        add({n1:3, n2:4})
+
+        //使用解構賦值來寫 ===========================================================================
+        function add2({n1, n2}){
+            console.log("使用解構賦值：", n1 + n2);
+        }
+        add2({n1:3, n2:4});
+    </script>
+</body>
+</html>
