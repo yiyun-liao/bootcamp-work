@@ -110,8 +110,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
         async function searchUsername(event){
             event.preventDefault();
-            username = searchUsernameContent.value
-            console.log(username);
+            searchUsernameError.textContent = "";
+            username = searchUsernameContent.value;
+            // console.log(username);
             if (!inputRule.test(username)) {
                 searchUsernameError.textContent = "帳號只能包含英數字，請重新輸入";
                 return;
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         throw new Error(`HTTP error! Status: {response.status}`);
                     }
                     const data = await response.json();
-                    console.log(data);
+                    // console.log(data);
                     searchUsernameResult.style.display="block";
                     if (data.data === null){
                         searchUsernameResult.querySelector('p').textContent="No Data";
@@ -137,5 +138,57 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
             }
         };
+
+        //update username
+        const updateUsernameSubmit = document.getElementById("update_my_username_form");
+        const updateUsernameContent = document.getElementById("update_my_username_content");
+        const updateUsernameResult = document.getElementById("update_my_username_result");
+        const greetingSection = document.querySelector(".main-section");
+        const greetingName = greetingSection.querySelector("main h2");
+        const messageListName = document.querySelectorAll(".message-member-name");
+        console.log(messageListName)
+
+        updateUsernameSubmit.addEventListener("submit", updateUsername);
+        updateUsernameResult.style.display="none";
+
+        async function updateUsername(event){
+            event.preventDefault();
+            new_username = updateUsernameContent.value;
+            console.log(new_username);               
+            try{
+                const response = await fetch("/api/member",{
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({"name":new_username}),                        
+                });
+                if(!response.ok){
+                    throw new Error(`HTTP error! Status: ${response.status}`)
+                }
+                const data = await response.json();
+                // console.log(data);
+                updateUsernameResult.style.display="block";
+                if (data.error){
+                    console.log("error")
+                    updateUsernameResult.querySelector('p').textContent="更新失敗";
+                }else if (data.ok){
+                    console.log("success")
+                    updateUsernameResult.querySelector('p').textContent="更新成功";
+                    messageListName.forEach(item => {
+                        if (item.textContent === greetingName.textContent.split("，")[0]){
+                            item.textContent= new_username;
+                            console.log("change", new_username)
+                        }else{
+                            console.log("fail", new_username)
+                        }
+                    })
+                    greetingName.textContent = `${new_username}，歡迎登入系統`;
+                }               
+
+            }catch(error){
+                updateUsernameResult.querySelector('p').textContent="Search Fail, please try again.";
+                console.error("Error", error)                
+            }
+            
+        }
     }
 })

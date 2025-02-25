@@ -109,6 +109,16 @@ def member(request: Request):
         "messages": messages
         })
 
+def get_messages():
+    get_message = get_db_connection()
+    get_message_cursor = get_message.cursor(dictionary=True)
+    get_message_cursor.execute("SELECT message.id, member.id AS member_id, member.name, message.content FROM message INNER JOIN member ON message.member_id=member.id ORDER BY message.id DESC ;")
+    messages=get_message_cursor.fetchall()
+    get_message.commit()
+    get_message.close()
+    # print(messages)
+    return messages
+
 @app.get("/error")
 def error(request: Request, message: str = "Login failed"):
     return templates.TemplateResponse("error.html", {
@@ -140,15 +150,6 @@ def create_message(request:Request, create_message_content: str = Form(...)):
     return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
  
 
-def get_messages():
-    get_message = get_db_connection()
-    get_message_cursor = get_message.cursor(dictionary=True)
-    get_message_cursor.execute("SELECT message.id, member.id AS member_id, member.name, message.content FROM message INNER JOIN member ON message.member_id=member.id ORDER BY message.id DESC ;")
-    messages=get_message_cursor.fetchall()
-    get_message.commit()
-    get_message.close()
-    # print(messages)
-    return messages
         
 @app.delete("/deleteMessage/{message_id}")
 async def delete_message(request:Request, message_id: int):
@@ -197,6 +198,7 @@ async def update_member_username(request:Request):
 
             # 檢查更新是否成功
             if cursor.rowcount > 0:
+                request.session['name'] = new_name
                 print(f"{member_id} 更新成功: {name} to {new_name}" )
                 return {"ok": True}
             else:
