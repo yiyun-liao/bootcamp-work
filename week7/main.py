@@ -96,7 +96,7 @@ def member(request: Request):
     if not request.session.get("SIGNIN"):
         return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     
-    # print("當前 session 資料:", request.session)
+    print("當前 session 資料:", request.session)
 
     messages = get_messages()
 
@@ -164,7 +164,7 @@ async def delete_message(request:Request, message_id: int):
     return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
 
 @app.get("/api/member")
-async def member_username_search(request:Request, username: Union[int, str] = Query(...)):    
+async def search_member_username(request:Request, username: Union[int, str] = Query(...)):    
     with get_db_connection() as db:
         with db.cursor(dictionary=True) as cursor:
             cursor.execute("SELECT * FROM member WHERE username=%s;", (username, ))
@@ -182,3 +182,26 @@ async def member_username_search(request:Request, username: Union[int, str] = Qu
                 }
                 print (result)
                 return JSONResponse(content=result, status_code=200)
+            
+@app.patch("/api/member")
+async def update_member_username(request:Request):
+    new_name_data= await request.json()
+    print(new_name_data)
+    new_name = new_name_data.get("name","")
+    name = request.session.get("name")
+    member_id = request.session.get("member_id")
+    with get_db_connection() as db:
+        with db.cursor(dictionary=True) as cursor:
+            cursor.execute("UPDATE member SET name=%s WHERE id=%s;", (new_name, member_id))
+            db.commit()
+
+            # 檢查更新是否成功
+            if cursor.rowcount > 0:
+                print(f"{member_id} 更新成功: {name} to {new_name}" )
+                return {"ok": True}
+            else:
+                print(f"更新失敗")
+                return {"error": True}
+
+
+
