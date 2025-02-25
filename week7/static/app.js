@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function(){
         const createMessageContent = document.getElementById('create_message_content');
         const createMessageError = document.getElementById('create_message_error');
         const createMessageSubmit = document.getElementById('create_message_submit');
-        const inputRule = /^[\p{L}\p{N}]+$/u;
         function createMessage(){
             if (createMessageContent.value === ""){
                 createMessageError.textContent="";
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
         createMessageContent.addEventListener('input',createMessage);
-
+        
         // deleteMessage
         document.querySelectorAll('.mdi-close').forEach(button => {
             button.addEventListener('click', function(){
@@ -79,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 deleteMessage(messageId);
             });
         })
-
+        
         async function deleteMessage(messageId) {
             console.log(messageId)
             const isConfirmed = confirm("確定要刪除這則留言嗎？");
@@ -98,6 +97,23 @@ document.addEventListener('DOMContentLoaded', function(){
                 console.error("Error fetching data:", error);
             }
         }
-
+        
+        // searchUsername
+        const searchUsernameSubmit = document.getElementById("search_username_submit");
+        const searchUsernameContent = document.getElementById("search_username_content");
+        const searchUsernameError = document.getElementById("search_username_error")
+        const inputRule = /^[A-Za-z0-9]+$/;
+        searchUsernameSubmit.addEventListener('click', searchUsername);
+            
+        async function searchUsername(event){
+            event.preventDefault();
+            if (!inputRule.test(searchUsernameContent.value)) {
+                searchUsernameError.textContent = "帳號只能包含英數字，請重新輸入";
+                return;
+            } else {
+                searchUsernameError.textContent = "";
+            }
+            console.log(searchUsernameContent.value);
+        };
     }
 })

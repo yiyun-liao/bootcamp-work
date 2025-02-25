@@ -20,14 +20,15 @@
     </div>
     <div class="main-section">
         <h2>查詢會員姓名</h2>
-        <form action="" method="get" id="search_username_form">
+        <form action="" method="" id="search_username_form" class="flex_form">
             <div class="input-section">
                 <div class="input-style">
-                    <input type="text" placeholder="Enter Username" name="search_username_content" id="search_username_content"> 
+                    <input type="text" placeholder="Enter Username" id="search_username_content"> 
                 </div>
+                <div class="error" id="search_username_error"></div>
             </div>
             <div class="input-style-submit">
-                <input type="submit" value="送出" id="search_username_submit" disabled>
+                <input type="submit" value="送出" id="search_username_submit">
             </div>
         </form>
         <ol class="message_area">
@@ -37,14 +38,15 @@
             </li>
         </ol>
         <h2>更新我的姓名</h2>
-        <form action="" method="get" id="renew_my_username_form">
+        <form action="" method="" id="renew_my_username_form" class="flex_form">
             <div class="input-section">
                 <div class="input-style">
-                    <input type="text" placeholder="Enter Username" name="renew_my_username_content" id="renew_my_username_content"> 
+                    <input type="text" placeholder="Enter Username" id="renew_my_username_content"> 
                 </div>
+                <div class="error" id="renew_my_username_error"></div>
             </div>
             <div class="input-style-submit">
-                <input type="submit" value="送出" id="renew_my_username_submit" disabled>
+                <input type="submit" value="送出" id="renew_my_username_submit">
             </div>
         </form>
         <ol class="message_area">

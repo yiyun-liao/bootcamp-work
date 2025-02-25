@@ -96,13 +96,13 @@ form{
 }
 
 .input-style-submit input[type="submit"]:disabled, 
-#search_username_form > .input-style-submit input[type="submit"]:disabled {
+.flex_form > .input-style-submit input[type="submit"]:disabled {
     background-color: rgb(125, 148, 181);
     cursor: not-allowed;
 }
 
 .input-style-submit input[type="submit"]:not(:disabled):hover,
-#search_username_form > .input-style-submit input[type="submit"]:not(:disabled):hover  {
+.flex_form > .input-style-submit input[type="submit"]:not(:disabled):hover  {
     background-color: rgb(13, 43, 85);
 }
 
@@ -199,17 +199,17 @@ li:hover{
 }
 
 
-#search_username_form{
+.flex_form{
     display: flex;
     justify-content:center;
     align-items: center;
 }
 
-#search_username_form > .input-section{
-    padding: 12px 24px;
+.flex_form > .input-section{
+    padding: 12px 24px 40px 24px;
 }
 
-#search_username_form > .input-style input, .input-style-submit input[type="submit"] {
+.flex_form > .input-style input, .input-style-submit input[type="submit"] {
     font: inherit;
     border: 1px solid rgb(204, 204, 204);
     border-radius: 4px;
@@ -217,11 +217,11 @@ li:hover{
     padding: 0.35rem;
 }
 
-#search_username_form > .input-style-submit{
+.flex_form > .input-style-submit{
     margin: 0 auto;
-    padding:12px 24px;
+    padding:12px 24px 40px 24px;
 }
 
-#search_username_form > .input-style-submit input[type="submit"] {
+.flex_form > .input-style-submit input[type="submit"] {
     width: inherit;
 }
