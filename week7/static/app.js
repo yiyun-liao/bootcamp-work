@@ -143,10 +143,10 @@ document.addEventListener('DOMContentLoaded', function(){
         const updateUsernameSubmit = document.getElementById("update_my_username_form");
         const updateUsernameContent = document.getElementById("update_my_username_content");
         const updateUsernameResult = document.getElementById("update_my_username_result");
+        const updateUsernameError = document.getElementById("update_my_username_error")
         const greetingSection = document.querySelector(".main-section");
         const greetingName = greetingSection.querySelector("main h2");
         const messageListName = document.querySelectorAll(".message-member-name");
-        console.log(messageListName)
 
         updateUsernameSubmit.addEventListener("submit", updateUsername);
         updateUsernameResult.style.display="none";
@@ -154,7 +154,9 @@ document.addEventListener('DOMContentLoaded', function(){
         async function updateUsername(event){
             event.preventDefault();
             new_username = updateUsernameContent.value;
-            console.log(new_username);               
+            console.log(new_username);
+            updateUsernameError.textContent = new_username === greetingName.textContent.split("，")[0] ? "請輸入新的使用者名稱" : "" ;           
+            
             try{
                 const response = await fetch("/api/member",{
                     method: "PATCH",
@@ -168,17 +170,17 @@ document.addEventListener('DOMContentLoaded', function(){
                 // console.log(data);
                 updateUsernameResult.style.display="block";
                 if (data.error){
-                    console.log("error")
+                    // console.log("error")
                     updateUsernameResult.querySelector('p').textContent="更新失敗";
                 }else if (data.ok){
-                    console.log("success")
+                    // console.log("success")
                     updateUsernameResult.querySelector('p').textContent="更新成功";
                     messageListName.forEach(item => {
                         if (item.textContent === greetingName.textContent.split("，")[0]){
                             item.textContent= new_username;
-                            console.log("change", new_username)
+                            // console.log("change", new_username)
                         }else{
-                            console.log("fail", new_username)
+                            // console.log("fail", new_username)
                         }
                     })
                     greetingName.textContent = `${new_username}，歡迎登入系統`;

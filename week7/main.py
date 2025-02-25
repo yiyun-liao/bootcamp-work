@@ -189,7 +189,6 @@ async def update_member_username(request:Request):
     new_name_data= await request.json()
     print(new_name_data)
     new_name = new_name_data.get("name","")
-    name = request.session.get("name")
     member_id = request.session.get("member_id")
     with get_db_connection() as db:
         with db.cursor(dictionary=True) as cursor:
@@ -198,8 +197,10 @@ async def update_member_username(request:Request):
 
             # 檢查更新是否成功
             if cursor.rowcount > 0:
-                request.session['name'] = new_name
+                name = request.session.get("name")
                 print(f"{member_id} 更新成功: {name} to {new_name}" )
+                request.session['name'] = new_name
+                print("當前 session 資料:", request.session)
                 return {"ok": True}
             else:
                 print(f"更新失敗")
