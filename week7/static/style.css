@@ -28,7 +28,7 @@ main{
 
 h2{
     font-size: 32px;
-    margin: 0;
+    margin: 20px 0 0 0;
     text-align: center;
 }
 h3{
@@ -38,7 +38,7 @@ h3{
 }
 
 .main-section{
-    padding: 80px 0px;
+    padding: 40px 0px;
     border-bottom: 2px solid rgb(19, 64, 128);
 }
 
@@ -95,12 +95,14 @@ form{
     align-items: center;
 }
 
-.input-style-submit input[type="submit"]:disabled {
+.input-style-submit input[type="submit"]:disabled, 
+#search_username_form > .input-style-submit input[type="submit"]:disabled {
     background-color: rgb(125, 148, 181);
     cursor: not-allowed;
 }
 
-.input-style-submit input[type="submit"]:not(:disabled):hover {
+.input-style-submit input[type="submit"]:not(:disabled):hover,
+#search_username_form > .input-style-submit input[type="submit"]:not(:disabled):hover  {
     background-color: rgb(13, 43, 85);
 }
 
@@ -115,7 +117,7 @@ form{
 ol{
     list-style: none;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 12px;
     font-size: 18px;
     font-weight: 400;
     max-width: 800px;
@@ -125,7 +127,7 @@ li{
     position: relative;
     display: flex;
     justify-content: start;
-    align-items: center;
+    align-items: flex-start;
     gap: 4px;
     border-radius: 4px;
 }
@@ -135,15 +137,43 @@ ol p{
     margin: 4px 0;
 }
 
+
+.message_area{
+    background-color:rgb(240, 243, 247);
+    overflow: hidden;
+    max-height: 300px;
+    overflow-y: auto;   
+    border-radius: 12px;
+}
+
+.message_area li{
+    justify-content: center;
+}
+
 .message-member-name{
-    min-width: 160px;
+    width: 160px !important;
     text-align: right;
     font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;   
+    text-overflow: ellipsis;
 }
 
 .message-content{
     margin-right: 32px;
+    width: calc(100% - 160px);
 }
+/* 
+.message_area button{
+    font: inherit;
+    border: 1px solid rgba(100, 100, 100, 0);
+    color: rgb(19, 64, 128);
+    border-radius: 4px;
+    width: inherit;
+    padding: 4px 0;
+    cursor: pointer;
+    margin: 4px 12px;
+} */
 
 i.mdi{
     position: absolute;
@@ -154,6 +184,7 @@ i.mdi{
     display: flex; 
     justify-content: center;
     align-items: center;
+    margin: 4px;
     padding: 4px;
     border-radius: 4px;
 }
@@ -165,4 +196,32 @@ i.mdi:hover{
 
 li:hover{
     background-color: rgb(233, 238, 246);
+}
+
+
+#search_username_form{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+#search_username_form > .input-section{
+    padding: 12px 24px;
+}
+
+#search_username_form > .input-style input, .input-style-submit input[type="submit"] {
+    font: inherit;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    width: 400px;
+    padding: 0.35rem;
+}
+
+#search_username_form > .input-style-submit{
+    margin: 0 auto;
+    padding:12px 24px;
+}
+
+#search_username_form > .input-style-submit input[type="submit"] {
+    width: inherit;
 }
