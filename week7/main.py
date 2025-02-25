@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Form, Request
+from fastapi import FastAPI, Form, Request, Query
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.status import HTTP_303_SEE_OTHER
 from fastapi.templating import Jinja2Templates
 import mysql.connector
+from typing import Annotated, Union
 from dotenv import load_dotenv
 import os
 
@@ -34,7 +35,7 @@ def index(request: Request):
         return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
     return templates.TemplateResponse("index.html",{
         "request": request,
-        "pageTitle": "week7 MVC",
+        "pageTitle": "week7 前後端分離",
         "title": "歡迎光臨，請註冊登入系統",
     })
 
@@ -102,7 +103,7 @@ def member(request: Request):
     name=request.session.get("name")
     return templates.TemplateResponse("member.html", {
         "request": request,
-        "pageTitle": "week7 MVC",
+        "pageTitle": "week7 前後端分離",
         "title": "歡迎光臨，這是會員頁",
         "username": name,
         "messages": messages
@@ -112,7 +113,7 @@ def member(request: Request):
 def error(request: Request, message: str = "Login failed"):
     return templates.TemplateResponse("error.html", {
         "request": request,
-        "pageTitle": "week7 MVC",
+        "pageTitle": "week7 前後端分離",
         "title": "失敗頁面",
         "subtitle": message
     })
@@ -161,3 +162,23 @@ async def delete_message(request:Request, message_id: int):
     db.commit()
     db.close()
     return RedirectResponse(url="/member", status_code=HTTP_303_SEE_OTHER)
+
+@app.get("/api/member")
+async def member_username_search(request:Request, username: Union[int, str] = Query(...)):    
+    with get_db_connection() as db:
+        with db.cursor(dictionary=True) as cursor:
+            cursor.execute("SELECT * FROM member WHERE username=%s;", (username, ))
+            username_is_exit=cursor.fetchone()
+            if username_is_exit is None:
+                print(f"查無使用者: {username}")
+                return {"data": None}
+            else:
+                result = {
+                    "data":{
+                        "id": username_is_exit["id"],
+                        "name":username_is_exit["name"],
+                        "username":username_is_exit["username"]
+                    }
+                }
+                print (result)
+                return result
