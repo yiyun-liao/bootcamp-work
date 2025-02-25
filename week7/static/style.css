@@ -13,7 +13,8 @@ header{
     height: 160px;
     display: flex;
     justify-content: space-between;
-    align-items: center;}
+    align-items: center;
+}
 
 h1{
     font-size: 40px;
@@ -144,12 +145,12 @@ ol p{
     max-height: 300px;
     overflow-y: auto;   
     border-radius: 12px;
+    list-style: none;
     margin: 0 auto;
     padding: 0 12px;
     font-size: 18px;
     font-weight: 400;
     max-width: 800px;
-    text-align: center;
 }
 
 .message_area li{
@@ -213,6 +214,7 @@ li:hover{
 
 .flex_form > .input-section{
     padding: 12px 24px 40px 24px;
+    
 }
 
 .flex_form > .input-style input, .input-style-submit input[type="submit"] {
@@ -230,4 +232,19 @@ li:hover{
 
 .flex_form > .input-style-submit input[type="submit"] {
     width: inherit;
+}
+
+.result_area{
+    background-color:rgb(240, 243, 247);
+    overflow: hidden;
+    max-height: 300px;
+    overflow-y: auto;   
+    border-radius: 12px;
+    margin: 0 auto;
+    padding: 0 12px;
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 800px;
+    min-height: 40px;
+    text-align: center;
 }

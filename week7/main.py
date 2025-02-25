@@ -171,7 +171,7 @@ async def member_username_search(request:Request, username: Union[int, str] = Qu
             username_is_exit=cursor.fetchone()
             if username_is_exit is None:
                 print(f"查無使用者: {username}")
-                return {"data": None}
+                return JSONResponse({"data": None})
             else:
                 result = {
                     "data":{

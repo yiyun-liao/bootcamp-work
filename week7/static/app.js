@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const inputRule = /^[A-Za-z0-9]+$/;
         searchUsernameSubmit.addEventListener('submit', searchUsername);
         
-        // searchUsernameResult.style.display="none";
+        searchUsernameResult.style.display="none";
 
         async function searchUsername(event){
             event.preventDefault();
@@ -125,8 +125,14 @@ document.addEventListener('DOMContentLoaded', function(){
                     const data = await response.json();
                     console.log(data);
                     searchUsernameResult.style.display="block";
+                    if (data.data === null){
+                        searchUsernameResult.querySelector('p').textContent="No Data";
+                    }else{
+                        searchUsernameResult.querySelector('p').textContent=`name: ${data.data.name} (username: ${data.data.username})`;
+                    }
 
                 } catch (error) {
+                    searchUsernameResult.querySelector('p').textContent="Search Fail, please try again."
                     console.error("Error", error)
                 }
             }
