@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Form, Request, Query
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.status import HTTP_303_SEE_OTHER
@@ -181,4 +181,4 @@ async def member_username_search(request:Request, username: Union[int, str] = Qu
                     }
                 }
                 print (result)
-                return result
+                return JSONResponse(content=result, status_code=200)

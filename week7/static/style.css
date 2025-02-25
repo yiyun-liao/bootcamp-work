@@ -144,6 +144,12 @@ ol p{
     max-height: 300px;
     overflow-y: auto;   
     border-radius: 12px;
+    margin: 0 auto;
+    padding: 0 12px;
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 800px;
+    text-align: center;
 }
 
 .message_area li{

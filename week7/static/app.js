@@ -99,21 +99,37 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         
         // searchUsername
-        const searchUsernameSubmit = document.getElementById("search_username_submit");
+        const searchUsernameSubmit = document.getElementById("search_username_form");
         const searchUsernameContent = document.getElementById("search_username_content");
-        const searchUsernameError = document.getElementById("search_username_error")
+        const searchUsernameError = document.getElementById("search_username_error");
+        const searchUsernameResult = document.getElementById("search_username_result");
         const inputRule = /^[A-Za-z0-9]+$/;
-        searchUsernameSubmit.addEventListener('click', searchUsername);
-            
+        searchUsernameSubmit.addEventListener('submit', searchUsername);
+        
+        // searchUsernameResult.style.display="none";
+
         async function searchUsername(event){
             event.preventDefault();
-            if (!inputRule.test(searchUsernameContent.value)) {
+            username = searchUsernameContent.value
+            console.log(username);
+            if (!inputRule.test(username)) {
                 searchUsernameError.textContent = "帳號只能包含英數字，請重新輸入";
                 return;
             } else {
                 searchUsernameError.textContent = "";
+                try{
+                    const response = await fetch(`/api/member?username=${encodeURIComponent(username)}`)
+                    if(!response.ok){
+                        throw new Error(`HTTP error! Status: {response.status}`);
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    searchUsernameResult.style.display="block";
+
+                } catch (error) {
+                    console.error("Error", error)
+                }
             }
-            console.log(searchUsernameContent.value);
         };
     }
 })
