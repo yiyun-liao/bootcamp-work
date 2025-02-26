@@ -166,6 +166,8 @@ async def delete_message(request:Request, message_id: int):
 
 @app.get("/api/member")
 async def search_member_username(request:Request, username: Union[int, str] = Query(...)):    
+    if not request.session.get('SIGNIN'):
+        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     with get_db_connection() as db:
         with db.cursor(dictionary=True) as cursor:
             cursor.execute("SELECT * FROM member WHERE username=%s;", (username, ))
@@ -186,6 +188,8 @@ async def search_member_username(request:Request, username: Union[int, str] = Qu
             
 @app.patch("/api/member")
 async def update_member_username(request:Request):
+    if not request.session.get('SIGNIN'):
+        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
     new_name_data= await request.json()
     print(new_name_data)
     new_name = new_name_data.get("name","")
