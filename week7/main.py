@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Form, Request, Query
+from fastapi import FastAPI, Form, Request, Query, Response
 from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
@@ -138,6 +138,8 @@ app.mount("/static", StaticFiles(directory="week7/static"), name="static")
 
 @app.post("/createMessage")
 def create_message(request:Request, create_message_content: str = Form(...)):
+    if not request.session.get('SIGNIN'):
+        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)    
     member_id = request.session.get("member_id")
     print(f"{member_id} 傳送了 {create_message_content}")
 
@@ -167,14 +169,14 @@ async def delete_message(request:Request, message_id: int):
 @app.get("/api/member")
 async def search_member_username(request:Request, username: Union[int, str] = Query(...)):    
     if not request.session.get('SIGNIN'):
-        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+        return JSONResponse(content={"data": None}, status_code=HTTP_303_SEE_OTHER)
     with get_db_connection() as db:
         with db.cursor(dictionary=True) as cursor:
             cursor.execute("SELECT * FROM member WHERE username=%s;", (username, ))
             username_is_exit=cursor.fetchone()
             if username_is_exit is None:
                 print(f"查無使用者: {username}")
-                return JSONResponse({"data": None})
+                return JSONResponse(content={"data": None}, status_code=200)
             else:
                 result = {
                     "data":{
@@ -187,13 +189,15 @@ async def search_member_username(request:Request, username: Union[int, str] = Qu
                 return JSONResponse(content=result, status_code=200)
             
 @app.patch("/api/member")
-async def update_member_username(request:Request):
+async def update_member_username(request:Request,response:Response):
     if not request.session.get('SIGNIN'):
-        return RedirectResponse(url="/", status_code=HTTP_303_SEE_OTHER)
+        return JSONResponse(content={"error": True}, status_code=HTTP_303_SEE_OTHER)
+
     new_name_data= await request.json()
     print(new_name_data)
     new_name = new_name_data.get("name","")
     member_id = request.session.get("member_id")
+
     with get_db_connection() as db:
         with db.cursor(dictionary=True) as cursor:
             cursor.execute("UPDATE member SET name=%s WHERE id=%s;", (new_name, member_id))
@@ -205,10 +209,10 @@ async def update_member_username(request:Request):
                 print(f"{member_id} 更新成功: {name} to {new_name}" )
                 request.session['name'] = new_name
                 print("當前 session 資料:", request.session)
-                return {"ok": True}
+                return JSONResponse(content={"ok": True}, status_code=200)
             else:
                 print(f"更新失敗")
-                return {"error": True}
+                return JSONResponse(content={"error": True}, status_code=200)
 
 
 

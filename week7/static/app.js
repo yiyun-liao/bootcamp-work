@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 searchUsernameError.textContent = "";
                 try{
                     const response = await fetch(`/api/member?username=${encodeURIComponent(username)}`)
+                    if (response.status == 303){
+                        window.location.href = "/";
+                    }
                     if(!response.ok){
                         throw new Error(`HTTP error! Status: {response.status}`);
                     }
@@ -163,6 +166,9 @@ document.addEventListener('DOMContentLoaded', function(){
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({"name":new_username}),                        
                 });
+                if (response.status == 303){
+                    window.location.href = "/";
+                }
                 if(!response.ok){
                     throw new Error(`HTTP error! Status: ${response.status}`)
                 }
