@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./app.js" defer></script>
+    <script src="./appW3-5.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300..700&family=Noto+Sans+TC:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">  
@@ -11,98 +11,98 @@
     <link rel="stylesheet" href="./style.css">
     <title>week1 HTML、CSS、JavaScript</title>
 <body>
-    <header id="header" class="base">
+    <header id="header" class="body__header">
         <div>
-            <p>My Website</p>
+            <p class="header__logo">My Website</p>
         </div>
-        <nav>
-            <ul>
-                <li>Item1</li>
-                <li>Item2</li>
-                <li>Item3</li>
-                <li>Item14</li>
+        <nav class="header__nav">
+            <ul class="nav__list">
+                <li class="nav__item">Item1</li>
+                <li class="nav__item">Item2</li>
+                <li class="nav__item">Item3</li>
+                <li class="nav__item">Item14</li>
             </ul>
         </nav>
         <i class="mdi mdi-menu" id="open-aside"></i>
     </header>
-    <aside id="main-page-asidse">
+    <aside class="aside" id="main-page-asidse">
         <i class="mdi mdi-close" id="close-aside"></i>
-        <ul>
-            <li>Item1</li>
-            <li>Item2</li>
-            <li>Item3</li>
-            <li>Item14</li>
+        <ul class="aside__list">
+            <li class="aside__item">Item1</li>
+            <li class="aside__item">Item2</li>
+            <li class="aside__item">Item3</li>
+            <li class="aside__item">Item14</li>
         </ul>
     </aside>
     <main>
         <section id="greeting">
-            <h1>Welcome to MyHome</h1>
+            <h1 class="greeting__title">Welcome to MyHome</h1>
         </section>
         <section id="gallery">
-            <ol class="small-boxes">
-                <li>
-                    <div>
-                        <img src="" alt="">
+            <ol class="gallery__small-list">
+                <li class="gallery__small-item">
+                    <div class="gallery__image-wrapper">
+                        <img src="./img/gallery-sample.jpg" alt="nyc" class="gallery__image">
                     </div>
-                    <p></p>
+                    <p class="gallery__text">標題一</p>
                 </li>
-                <li>
-                    <div>
-                        <img src="" alt="">
+                <li class="gallery__small-item">
+                    <div class="gallery__image-wrapper">
+                        <img src="./img/gallery-sample.jpg" alt="nyc" class="gallery__image">
                     </div>
-                    <p></p>
+                    <p class="gallery__text">標題一</p>
                 </li>
-                <li>
-                    <div>
-                        <img src="" alt="">
+                <li class="gallery__small-item">
+                    <div class="gallery__image-wrapper">
+                        <img src="./img/gallery-sample.jpg" alt="nyc" class="gallery__image">
                     </div>
-                    <p></p>
+                    <p class="gallery__text">標題一</p>
                 </li>
             </ol>
-            <ol class="big-boxes">
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+            <ol class="gallery__big-list">
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text"></p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
-                <li>
-                    <i class="mdi mdi-star"></i>
-                    <p></p>
+                <li class="gallery__big-item">
+                    <i class="gallery__big-i mdi mdi-star"></i>
+                    <p class="gallery__big-item-text">Title</p>
                 </li>
             </ol>
-            <div>
-                <button id="load-more">Load More</button>
+            <div class="gallery__actions">
+                <button class="gallery__actions-btn" id="load-more">Load More</button>
             </div>
         </section>
     </main>
