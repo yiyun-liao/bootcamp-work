@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle }}</title>
+    <link href="{{ url_for('static', path='style.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='app.js') }}" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>歡迎光臨，這是會員頁</h1>
+    </header>
+    <div class="main-section">
+        <main>
+            <h2><span id="member-name">loading...</span>，歡迎登入系統</h2>
+            <h3><a href="/signout">登出系統</a></h3>
+        </main>
+    </div>
+    <div class="main-section">
+        <h2>快來留言吧</h2>
+        <form action="/createMessage" method="post" id="create_message_form">
+            <div class="input-section">
+                <div class="input-style">
+                    <label for="create_message">內容</label>
+                    <input type="text" name="create_message_content" id="create_message_content"> 
+                </div>
+                <div class="error" id="create_message_error"></div>
+            </div>
+            <div class="input-style-submit">
+                <input type="submit" value="送出" id="create_message_submit" disabled>
+            </div>
+        </form>
+    </div>
+    <div class="main-section" >
+        <h2>留言區</h2>
+        <div class="seperator"></div>
+        <div class="message" id="messages">loading...</div>
+    </div>
+    <script>
+        let currentMember = null;
+        async function getCurrentMember(){
+            let response = await fetch("/api/member");
+            let result = await response.json();
+            console.log(result);
+            if (result.member === null){
+                window.location="/";
+            }else{
+                currentMember = result.member
+                let memberName = document.getElementById("member-name");
+                memberName.textContent = currentMember.name;
+                // console.log(currentMember)
+            }
+        }
+
+        async function getMessage() {
+            let response = await fetch("/api/message");
+            let result = await response.json();
+            let container = document.querySelector("#messages");
+            // console.log(container)
+            container.innerHTML="";
+            result.data.forEach((message) => {
+                // console.log(message);
+                let block = document.createElement("div");
+                let content = document.createElement("span");
+                content.textContent = message.content;
+                block.appendChild(content);
+                if(message.member_id===currentMember.member_id){
+                    let btn = document.createElement("button");
+                    btn.textContent="x";
+                    btn.addEventListener("click",()=>{
+                        deleteMessage(message.id);
+                    })
+                    content.appendChild(btn);
+                }
+                container.appendChild(block);
+            });
+            
+        }
+        async function init() {
+            getCurrentMember();
+            getMessage();            
+        }
+
+        init();
+        function deleteMessage(){
+            // ignore
+        }
+    </script>
+</body>
+</html>
