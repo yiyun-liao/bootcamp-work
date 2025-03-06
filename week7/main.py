@@ -29,6 +29,8 @@ def get_db_connection():
         database="website"
     )
 
+
+
 @app.get("/")
 def index(request: Request):
     if request.session.get("SIGNIN") is True:
