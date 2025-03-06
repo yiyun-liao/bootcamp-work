@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XXS practice</title>
+</head>
+<body>
+    <input type="text" name="" id="name">
+    <button onclick="test()" id="name-submit">Submit</button>
+    <div id="output"></div>
+    <script>
+        function test(){
+            let name = document.getElementById("name").value;
+            let submit = document.getElementById("name-submit");
+            let answer = document.getElementById("output");
+            answer.innerHTML = name;
+            // 輸入：<img src="x" onerror="alert('XSS Attack!')"> 
+        }
+    </script>
+</body>
+</html>
+

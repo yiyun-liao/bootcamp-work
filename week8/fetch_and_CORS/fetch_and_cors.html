@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch_and_cors</title>
+</head>
+<body>
+    <script>
+        // fetch('https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json')
+        //     .then(response => response.text())
+        //     .then(data => console.log(data))
+        //     .catch(error => console.error('Error:', error));
+        fetch('https://www.google.com/',{mode: 'no-cors'})
+            .then(response => {console.log('response', response)
+                return response.text()
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

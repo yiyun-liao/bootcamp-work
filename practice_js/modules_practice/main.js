@@ -6,5 +6,7 @@
 import x, {obj, data} from './lib.js'; 
 // import x from './lib.js'; 
 // import {obj, data} from './lib.js'; 
+// import * as lib from './lib.js';
+// console.log(lib.obj);
 console.log(x);
 console.log(obj, data);
