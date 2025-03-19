@@ -58,15 +58,15 @@
 	- screen > 1200px `.big-boxes li:nth-child(5n+1) {grid-column: span 2;}`
 	- 1200px > screen > 600 用 js 寫
 		- function 獨立運行，並且在 fetch(), 跟每次點擊時會重新計算
-		-
-        ```javascript
-        if(window.matchMedia("(min-width: 600px) and (max-width: 1200px)").matches){
-        bigBoxes.forEach(box => {
-            box.style.gridColumn = 'span 1';
-        });
-        if(currentIndex % 4 !== 0){
-            bigBoxes[currentIndex-1].style.gridColumn = 'span 2';
-            bigBoxes[currentIndex-2].style.gridColumn = 'span 2';
-        }
-        }
-        ```
+
+```javascript
+	if(window.matchMedia("(min-width: 600px) and (max-width: 1200px)").matches){
+	bigBoxes.forEach(box => {
+		box.style.gridColumn = 'span 1';
+	});
+	if(currentIndex % 4 !== 0){
+		bigBoxes[currentIndex-1].style.gridColumn = 'span 2';
+		bigBoxes[currentIndex-2].style.gridColumn = 'span 2';
+	}
+	}
+```
