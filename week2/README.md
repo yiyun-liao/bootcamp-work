@@ -1,28 +1,27 @@
 ## task3 javascript
--
 ```javascript
-    for (let name of data) { 
-        let middleName;
-        // middleName = name[2]，字串本身也是一個 array ，所以可以直接取裡面的字元
-        // middleName = '明'
-        if (name.length === 2) {
-        middleName = name[name.length - 1]; // 如果名字只有兩個字，取最後一個字
-        } else {
-        middleName = name[name.length - 2]; // 取倒數第二個字
-        }  
+for (let name of data) { 
+    let middleName;
+    // middleName = name[2]，字串本身也是一個 array ，所以可以直接取裡面的字元
+    // middleName = '明'
+    if (name.length === 2) {
+    middleName = name[name.length - 1]; // 如果名字只有兩個字，取最後一個字
+    } else {
+    middleName = name[name.length - 2]; // 取倒數第二個字
+    }  
 
-        // count 。 新增進 object 及計算同時進行
-        // key (明) 如果有值就「值+1」 ，沒有的話「0+1」
-        // 舉例來說：middleNameCount[明] = 1 就是, middleNameCount = {明：1} ，但現在在這個值寫了判斷式
-        middleNameCount[middleName] = (middleNameCount[middleName] || 0) + 1;
+    // count 。 新增進 object 及計算同時進行
+    // key (明) 如果有值就「值+1」 ，沒有的話「0+1」
+    // 舉例來說：middleNameCount[明] = 1 就是, middleNameCount = {明：1} ，但現在在這個值寫了判斷式
+    middleNameCount[middleName] = (middleNameCount[middleName] || 0) + 1;
 
-        // if it the first time, record it 。 如果 middleNameMap[明] 不存在，就新增進 object 
-        // middleNameMap[明] = 陳王明雅, middleNameMap = {明：陳王明雅}
-        // 這邊改寫簡單一點，直接定義  middleNameMap[middleName] = name;
-        if (!middleNameMap[middleName]) {
-        middleNameMap[middleName] = name;
-        }
+    // if it the first time, record it 。 如果 middleNameMap[明] 不存在，就新增進 object 
+    // middleNameMap[明] = 陳王明雅, middleNameMap = {明：陳王明雅}
+    // 這邊改寫簡單一點，直接定義  middleNameMap[middleName] = name;
+    if (!middleNameMap[middleName]) {
+    middleNameMap[middleName] = name;
     }
+}
 ```
   
 ## task2 javascript
@@ -31,21 +30,21 @@
 - 所以試著這樣寫，但發現找到 value: count =1 要取 key ，所以還是要同時找到兩個
 -
 ```javascript
-    // 找出唯一的中間名
-    let uniqueMiddleName = null;
-    for (let [key, count] of Object.entries(middleNameCount)) {
-        if (count === 1) {
-        uniqueMiddleName = key;
-        break;
-        }
+// 找出唯一的中間名
+let uniqueMiddleName = null;
+for (let [key, count] of Object.entries(middleNameCount)) {
+    if (count === 1) {
+    uniqueMiddleName = key;
+    break;
     }
-    
-    // 輸出結果
-    if (uniqueMiddleName) {
-        console.log(middleNameMap[uniqueMiddleName]);
-    } else {
-        console.log("沒有");
-    }
+}
+
+// 輸出結果
+if (uniqueMiddleName) {
+    console.log(middleNameMap[uniqueMiddleName]);
+} else {
+    console.log("沒有");
+}
 ```
 
 ## task1 javascript
@@ -53,28 +52,27 @@
 - 條件運算子 (ternary operator) `condition ? expressionIfTrue : expressionIfFalse;`
 -
 ```javascript
-    const friendLocations = Object.entries(messages).map(([name, message]) => {
-    for (const station of stations) {
-        if (message.includes(station)) {
-        return { name, station };
-        }
+const friendLocations = Object.entries(messages).map(([name, message]) => {
+for (const station of stations) {
+    if (message.includes(station)) {
+    return { name, station };
     }
-    return null;
-    }).filter(Boolean)
+}
+return null;}).filter(Boolean)
 ```
 - `Object.entries(messages)` 將 `messages` 物件轉換為一個陣列，其中每個元素是 `[key, value]` 的形式。
 -
 ```javascript
-    const messages = {
-        "Bob": "I'm at Ximen MRT station.",
-        "Mary": "I have a drink near Jingmei MRT station."
-    };
-    Object.entries(messages);
-    // 結果:
-    [
-        ["Bob", "I'm at Ximen MRT station."],
-        ["Mary", "I have a drink near Jingmei MRT station."]
-    ]
+const messages = {
+    "Bob": "I'm at Ximen MRT station.",
+    "Mary": "I have a drink near Jingmei MRT station."
+};
+Object.entries(messages);
+// 結果:
+[
+    ["Bob", "I'm at Ximen MRT station."],
+    ["Mary", "I have a drink near Jingmei MRT station."]
+]
 ```
 - `map(([name, message]) => {...})`
 	- 使用解構賦值語法 `[name, message]` 提取每個陣列元素的 key 與 value，分別對應於朋友的名稱和訊息。
@@ -131,5 +129,5 @@
         	- 但如果提供 `key="price"`，Python 無法理解如何使用這個字串來處理每個元素，因此會引發錯誤。
 
 ## task1 python
-- `list.index(elmnt)` 取得 value 的對應 key (int)
-- `list.append(elmnt)` 在列表後面加上 element
+- `list.index(elemt)` 取得 value 的對應 key (int)
+- `list.append(elemt)` 在列表後面加上 element
